@@ -7,6 +7,7 @@ class AppController extends ApiServices {
 
     use ResponseTrait;
 
+    public $baseURL;
     public $AppAdminURL;
     public $sessObject;
     public $imageObject;
@@ -92,7 +93,7 @@ class AppController extends ApiServices {
                     'pagetitle' => 'Access Denied',
                     'content' => $this->permission_denied
                 ]) );
-            } 
+            }
         }
 
         return true;

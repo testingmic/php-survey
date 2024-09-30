@@ -10,6 +10,10 @@ class ApiServices extends BaseController {
 	public $generalApi;
     public $_userApiToken;
 	public $save_local_file;
+	public $sessionObj;
+	public $sessionObject;
+	public $user_agent;
+	public $ip_address;
 	public $max_attachment_size = 25;
 	public $accepted_file_types = ".pdf,.jpg,.png,.jpeg,.docx,.doc";
     public $server_uri = "http://localhost/survey/public/api/";
@@ -40,9 +44,9 @@ class ApiServices extends BaseController {
 		// set the token for requests
 		$this->_userApiToken = !empty($this->_userApiToken) ? $this->_userApiToken : $this->sessionObj->_userApiToken;
 
-		if(empty($this->_userApiToken) && !empty($this->sessObject->_generalAPIToken)) {
+		if(empty($this->_userApiToken) && !empty($this->sessionObj->_generalAPIToken)) {
 			// set the api to use
-			$this->_userApiToken = $this->sessObject->_generalAPIToken;
+			$this->_userApiToken = $this->sessionObj->_generalAPIToken;
 		}
 
 		$postman = $this->postman($endpoint, $param);

@@ -1,5 +1,6 @@
 <?php
 include_once 'headtags.php';
+global $AppName, $baseURL;
 $settings = [
     'publicize_result', 'receive_statistics',
     'allow_multiple_voting', 'paginate_question', 'allow_skip_question'

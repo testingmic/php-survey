@@ -28,6 +28,13 @@ class Api extends BaseController {
     protected $global_limit = 250;
     protected $AuthorizationToken;
     protected $accepted_variables;
+    protected $sessionObj;
+    protected $allowed_methods;
+    protected $api_version;
+    protected $available_versions;
+    public $req_path;
+    public $user_agent;
+    public $ip_address;
 
     // keys to exempt when processing the request parameter keys
     protected $keys_exempted = [
@@ -541,7 +548,7 @@ class Api extends BaseController {
             $params['_model_request'] = $this->req_method;
             
             // convert the response into an arry if not already in there
-            $request = $classObject->$method($params, $this->primaryKey);
+            $request = $classObject->{$method}($params, $this->primaryKey);
 
             // if the class and method is to verify
             if(in_array($class_and_method, ['auth/verify'])) {
