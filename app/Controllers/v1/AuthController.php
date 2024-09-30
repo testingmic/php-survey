@@ -46,7 +46,7 @@ class AuthController extends AccessBridge {
                 }
                 
                 // verify the user password
-                if(!password_verify($params['password'], $data[0]['password'])) {
+                if(password_verify($params['password'], $data[0]['password'])) {
                     return lang('Errors.invalidCredential');
                 }
 

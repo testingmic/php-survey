@@ -64,7 +64,37 @@ $Route = $SPLIT[0];
                 </div>
             <?php } else { ?>
                 <div class="container">
-                   
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <a href="<?= $baseURL ?>" class="text-white">
+                                <i class="fa fa-bezier-curve"></i>
+                            </a> <?= $AppName ?>
+                        </div>
+                        <?php if( $isLoggedIn ) { ?>
+                            <div class="userprofile">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item dropdown ms-auto">
+                                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                            <?= !empty(get_meta($metadata, 'fullname')) ? get_meta($metadata, 'fullname') : $sessObj->_userName ?>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a href="<?= $baseURL ?>account/settings" class="dropdown-item">
+                                                <i class="fa fa-cog"></i> Account Settings
+                                            </a>
+                                            <a href="<?= $baseURL ?>account/support" class="dropdown-item">
+                                            <i class="fa fa-life-ring"></i> Support
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a href="#" onclick="return logout()" class="dropdown-item">
+                                                <i class="fa fa-lock"></i> Logout
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        <?php } ?>
+
+                    </div>
                 </div>
             <?php } ?>
         </div>
