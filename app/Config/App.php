@@ -24,8 +24,8 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://localhost/survey/public/';
-    public $rootURL = 'http://localhost/survey/';
+    public $baseURL = 'http://localhost/surveys/public/';
+    public $rootURL = 'http://localhost/surveys/';
 
     /**
      * --------------------------------------------------------------------------

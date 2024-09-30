@@ -1,0 +1,7 @@
+writable/logs/*
+writable/cache/*
+!writable/logs/index.html
+!writable/logs/.htaccess
+!writable/cache/.htaccess
+!writable/cache/index.html
+vendor/*
