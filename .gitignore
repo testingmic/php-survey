@@ -1,5 +1,6 @@
 writable/logs/*
 writable/cache/*
+writable/session/*
 !writable/logs/index.html
 !writable/logs/.htaccess
 !writable/cache/.htaccess

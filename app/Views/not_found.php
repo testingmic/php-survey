@@ -1,5 +1,7 @@
 <?php
 include_once 'headtags.php';
+
+global $AppName, $baseURL;
 ?>
 <div class='dialog-container'>
     <div class='card card-width'>
