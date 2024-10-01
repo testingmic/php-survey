@@ -5,7 +5,7 @@ global $AppName, $baseURL;
 ?>
 <?= dashboard_header($baseURL, false) ?>
 <div class='dialog-container'>
-    <div class='card card-width'>
+    <div class='card card-width mb-5'>
         <div class='card-content text-center position-relative'>
             <?= form_overlay() ?>
             <h3 class="border-bottom pb-2 border-primary">Create an Account</h3>

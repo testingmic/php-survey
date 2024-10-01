@@ -1,7 +1,7 @@
 <?php
 include_once 'headtags.php';
 ?>
-<div class="container pt-4">
+<div class="container pt-4 mb-5">
     <div class="d-flex justify-content-between">
         <div></div>
         <div>

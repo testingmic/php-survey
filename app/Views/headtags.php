@@ -78,6 +78,9 @@ $Route = $SPLIT[0];
                                             <?= !empty(get_meta($metadata, 'fullname')) ? get_meta($metadata, 'fullname') : $sessObj->_userName ?>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end">
+                                            <a href="<?= $baseURL ?>dashboard" class="dropdown-item">
+                                                <i class="fa fa-home"></i> Dashboard
+                                            </a>
                                             <a href="<?= $baseURL ?>account/settings" class="dropdown-item">
                                                 <i class="fa fa-cog"></i> Account Settings
                                             </a>

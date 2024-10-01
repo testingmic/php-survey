@@ -3,7 +3,7 @@ include_once 'headtags.php';
 
 global $AppName, $baseURL;
 ?>
-<div class='dialog-container'>
+<div class='dialog-container mb-4'>
     <div class='card card-width mt-5'>
         <div class='card-content text-center'>
             <h4 class="appname"><?= $AppName ?></h4>
@@ -19,7 +19,7 @@ global $AppName, $baseURL;
 
         </div>
         <div class='card-footer'>
-            <a class="card-footer-item" href="<?= $baseURL ?>">Back to the Survey App</a>
+            <a class="card-footer-item" href="<?= $baseURL ?>dashboard">Back to the Dashboard</a>
         </div>
     </div>
 </div>

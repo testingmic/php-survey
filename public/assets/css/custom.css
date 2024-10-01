@@ -330,6 +330,16 @@ time:hover {
     margin: auto auto;
 }
 
+.video-container {
+    max-width: 1200px;
+    margin: auto auto;
+}
+
+.video-container video {
+    width: 100%;
+    height: auto;
+}
+
 .dialog-container {
     /* height: 100%; */
     max-width: 1200px;
@@ -344,6 +354,22 @@ time:hover {
     color: #fff;
     width: 300px;
     border-radius: 4px;
+    height: 50px;
+    padding: 12px;
+}
+
+.login-button {
+    border: 1px solid #0071f3;
+    background-color: #fff;
+    color: #0071f3;
+    height: 50px;
+    padding: 12px;
+}
+
+.login-button:hover {
+    border: 1px solid #0071f3;
+    background-color: #0071f3;
+    color: #fff;
     height: 50px;
     padding: 12px;
 }

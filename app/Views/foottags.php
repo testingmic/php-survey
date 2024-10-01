@@ -1,4 +1,4 @@
-<div class="border-top text-center p-2 mt-5">
+    <div class="border-top text-center p-2 pt-4">
             <strong>Powered By:</strong>
             <a href="https://emmallextech.com" target="_blank">
                 Emmallex Technologies

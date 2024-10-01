@@ -3,17 +3,17 @@ include_once 'headtags.php';
 
 global $AppName, $baseURL;
 ?>
-<?= dashboard_header($baseURL) ?>
+<?= dashboard_header($baseURL, true) ?>
 <div class='dialog-container'>
     <div class="mt-3">
-        <div class='card card-width'>
+        <div class='card card-width mb-5'>
             <div class='card-content text-center position-relative'>
                 <?= form_overlay() ?>
                 <img width="150" height="199" src="<?= $baseURL ?>assets/images/notfound.png" />
-                <h3 class="border-bottom pb-2 border-primary">App Login</h3>
+                <h3 class="border-bottom pb-2 border-primary">Account Login</h3>
                 <form class="appForm" action="<?= $baseURL ?>api/auth/login">
                     <div class="form-group mb-2">
-                        <label for="username">Username</label>
+                        <label for="username">Username or Email</label>
                         <input type="text" name="username" id="username" class="form-control text-center">
                     </div>
                     <div class="form-group mb-3">

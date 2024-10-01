@@ -35,7 +35,7 @@ $routes->get('/', 'Home::index');
 $routes->get('/login', 'Home::login');
 $routes->get('/signup', 'Home::signup');
 $routes->get('/embed', 'Surveys::embed');
-$routes->get('/dashboard', 'Home::index');
+$routes->get('/dashboard', 'Home::dashboard');
 $routes->post('/surveys/save', 'Surveys::save');
 $routes->get('/embed/(:any)', 'Surveys::embed/$1/$2');
 

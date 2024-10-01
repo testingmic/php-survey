@@ -11,7 +11,7 @@ $canDelete = hasPermission("questions", "add", $metadata);
     <div class="d-flex justify-content-between">
         <div></div>
         <div>
-            <a class="btn btn-outline-primary btn-sm" href="<?= $baseURL ?>">
+            <a class="btn btn-outline-primary btn-sm" href="<?= $baseURL ?>dashboard">
                 <i class="fa fa-list"></i> List Surveys
             </a>
             <?php if( !empty($isFound) && hasPermission("surveys", "update", $metadata)) { ?>

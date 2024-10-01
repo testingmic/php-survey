@@ -708,7 +708,10 @@ function dashboard_header($baseURL = null, $signup = true) {
             </p>
             <div class="header-image mt-5">
                 <a href="'.$baseURL.''.($signup ? 'signup' : 'login').'" class="btn '.(!$signup ? 'hidden' : null).' signup-button">
-                    <i class="fa fa-user"></i> Sign Up for Free
+                    <i class="fa fa-user-cog"></i> Sign Up for Free
+                </a>
+                <a href="'.$baseURL.'login" class="btn '.($signup && $signup !== 'both' ? 'hidden' : null).' login-button">
+                    <i class="fa fa-user"></i> Login Into Your Account
                 </a>
                 <div class="border-bottom mt-4 mb-4"></div>
             </div>

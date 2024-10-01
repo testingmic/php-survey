@@ -1,7 +1,7 @@
 <?php
 include_once 'headtags.php';
 ?>
-<div class="survey-content">
+<div class="survey-content mb-5">
     <?php if( !$isResult ) { ?>
         <div class="survey-body">
             <?php if (!empty($survey['cover_art'])) { ?>

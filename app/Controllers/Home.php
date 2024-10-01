@@ -13,19 +13,33 @@ class Home extends AppController {
      */
     public function index() {
         
-        $this->login_check();
+        try {
 
+            return $this->show_display('landing');
+
+        } catch(\Exception $e) {}
+
+    }
+
+    /**
+     * Dashboard Page
+     * 
+     * @return String
+     */
+    public function dashboard() {
         
         try {
+
+            // check if the user is logged in
+            $this->login_check();
             
             // get the clients and web statistics list
             $data['surveys_list'] = $this->api_lookup('GET', 'surveys');
 
             return $this->show_display('index', $data);
 
-        } catch(\Exception $e) {
-            return $e->getMessage();
-        }
+        } catch(\Exception $e) {}
+
     }
 
     /**
