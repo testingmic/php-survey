@@ -325,11 +325,18 @@ time:hover {
     background: #f8f9fa
 }
 
+.top-section {
+    max-width: 900px;
+    margin: auto auto;
+}
+
 .dialog-container {
-    height: 100%;
+    /* height: 100%; */
+    max-width: 1200px;
     padding-left: 5%;
     padding-right: 5%;
     margin-top: 40px;
+    margin: auto auto;
 }
 
 .signup-button {
@@ -344,6 +351,7 @@ time:hover {
 .signup-button:hover {
     background-color: #fff;
     color: #00bf6f;
+    border: 1px solid #00bf6f;
 }
 
 .card {

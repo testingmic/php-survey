@@ -687,6 +687,41 @@ function form_overlay($display = "none") {
     </div>';
 }
 
+/**
+ * Dashboard Header
+ * 
+ * @param String    $baseURL
+ * @param Bool      $signup
+ * 
+ * @return String
+ */
+function dashboard_header($baseURL = null, $signup = true) {
+    return '
+        <div class="text-center top-section">
+            <div class="header-container">
+                <h3 class="header-title">
+                    Create online surveys and forms that mean business
+                </h3>
+            </div>
+            <p class="header-subtitle">
+                Get better insights faster—with expert templates, helpful AI, and convenient ways to reach more people.
+            </p>
+            <div class="header-image mt-5">
+                <a href="'.$baseURL.''.($signup ? 'signup' : 'login').'" class="btn '.(!$signup ? 'hidden' : null).' signup-button">
+                    <i class="fa fa-user"></i> Sign Up for Free
+                </a>
+                <div class="border-bottom mt-4 mb-4"></div>
+            </div>
+        </div>';
+}
+
+/**
+ * Get the minute difference between two times
+ * 
+ * @param String    $time
+ * 
+ * @return Int
+ */
 function minute_diff($time) {
 
     $time_difference = strtotime($time) - time();

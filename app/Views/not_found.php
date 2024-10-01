@@ -4,7 +4,7 @@ include_once 'headtags.php';
 global $AppName, $baseURL;
 ?>
 <div class='dialog-container'>
-    <div class='card card-width'>
+    <div class='card card-width mt-5'>
         <div class='card-content text-center'>
             <h4 class="appname"><?= $AppName ?></h4>
             <img width="150" height="199" src="<?= $baseURL ?>assets/images/notfound.png" />

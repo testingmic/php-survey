@@ -6,6 +6,11 @@ use App\Controllers\AppController;
 
 class Home extends AppController {
 
+    /**
+     * Index Page
+     * 
+     * @return String
+     */
     public function index() {
         
         $this->login_check();
@@ -23,6 +28,29 @@ class Home extends AppController {
         }
     }
 
+    /**
+     * Login Page
+     * 
+     * @return String
+     */
+    public function login() {
+        return $this->show_display('login');
+    }
+
+    /**
+     * Signup Page
+     * 
+     * @return String
+     */
+    public function signup() {
+        return $this->show_display('signup');
+    }
+
+    /**
+     * Not Found Page
+     * 
+     * @return String
+     */
     public function not_found() {
         return $this->show_display('not_found');
     }
