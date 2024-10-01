@@ -87,7 +87,8 @@ class AppController extends ApiServices {
         
         if(empty($this->sessObject->_clientId) && empty($this->sessObject->_userApiToken)) {
             try {
-                die( view("login") );
+                $data['isLoggedIn'] = false;
+                die( view("login", $data) );
             } catch(\Exception $e) {
                 die( view("not_found", [
                     'pagetitle' => 'Access Denied',
