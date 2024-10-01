@@ -23,6 +23,14 @@
     box-shadow: 2px -1px 2px 2px #b8b7b7;
 }
 
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
 .visually-hidden {
     border: 0;
     clip: rect(0 0 0 0);
@@ -361,12 +369,16 @@ p.alert {
     color: #f75959
 }
 
+.userprofile ul li a:hover {
+    color: #fff;
+}
+
 #app-disabled-status {
     display: none
 }
 
 .survey-header {
-    background-color: #353535;
+    background-color: #0071f3;;
     color: #fff;
     font-size: 30px;
     padding: 0.5em 0;

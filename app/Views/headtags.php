@@ -67,8 +67,8 @@ $Route = $SPLIT[0];
                     <div class="d-flex justify-content-between">
                         <div>
                             <a href="<?= $baseURL ?>" class="text-white">
-                                <i class="fa fa-bezier-curve"></i>
-                            </a> <?= $AppName ?>
+                                <i class="fa fa-bezier-curve"></i> <?= $AppName ?>
+                            </a> 
                         </div>
                         <?php if( $isLoggedIn ) { ?>
                             <div class="userprofile">

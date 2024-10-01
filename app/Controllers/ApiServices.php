@@ -156,6 +156,7 @@ class ApiServices extends BaseController {
 
 				// set the user information as a variable for the request
 				if( is_array($validate) ) {
+					$this->_userData = $validate;
 					$params['_userData'] = $validate;
 				}
 
@@ -192,7 +193,7 @@ class ApiServices extends BaseController {
 		$params['_model_request'] = $this->req_method;
 		
 		// convert the response into an arry if not already in there
-		$request = $classObject->$class_method($params, $primary_key);
+		$request = $classObject->{$class_method}($params, $primary_key);
 
 		// if the request is 
 		if(in_array($this->req_method, ["GET"]) && isset($request['code'])) {

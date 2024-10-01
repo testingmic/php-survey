@@ -14,7 +14,7 @@ include_once 'headtags.php';
     </div>
     <div class="row mt-3">
         <?php foreach($surveys_list as $survey) { ?>
-            <div class="col-md-4 mb-2">
+            <div class="col-lg-4 col-md-6 mb-3">
                 <div class="card">
                     <div class="card-header">
                         <?= $survey['title'] ?>
@@ -24,7 +24,7 @@ include_once 'headtags.php';
                             <img class="m-0" width="100%" src="<?= $baseURL . $survey['cover_art'] ?>" alt="">
                         </div>
                         <div>
-                            <?= character_limiter(strip_tags($survey['description']), 160) ?>
+                            <?= character_limiter(strip_tags($survey['description']), 120) ?>
                         </div>
                         <div class="mt-2">
                             <small>
@@ -34,16 +34,27 @@ include_once 'headtags.php';
                                 <i class="fa fa-chart-pie"></i> <?= $survey['submitted_answers'] ?> Participants
                             </small>
                         </div>
+                        <div class="mt-1 border-top pt-1">
+                            <small class="float-left">
+                                <i class="fa fa-calendar"></i> Start Date: <?= date('jS M y', strtotime($survey['start_date'])) ?>
+                            </small>
+                            <small class="float-right">
+                                <i class="fa fa-calendar-check"></i> End Date: <?= date('jS M y', strtotime($survey['end_date'])) ?>
+                            </small>
+                        </div>
                     </div>
                     <div class="card-footer w-100">
                         <div class="w-100 d-flex justify-content-between">
                             <div>
                                 <?php if(hasPermission("surveys", "update", $metadata)) { ?>
-                                <a href="<?= $baseURL ?>surveys/modify/<?= $survey['slug'] ?>/edit" class="btn btn-sm btn-outline-success">
+                                <a href="<?= $baseURL ?>surveys/modify/<?= $survey['slug'] ?>/edit" title="Edit Survey" class="btn btn-sm btn-outline-success">
                                     <i class="fa fa-edit"></i>
                                 </a>
+                                <a href="<?= $baseURL ?>surveys/modify/<?= $survey['slug'] ?>/questions" title="View Survey Questions" class="btn btn-sm btn-outline-info">
+                                    <i class="fa fa-question-circle"></i>
+                                </a>
                                 <?php } ?>
-                                <a target="_blank" href="<?= $baseURL ?>embed/<?= $survey['slug'] ?>" class="btn btn-sm btn-outline-primary">
+                                <a target="_blank" href="<?= $baseURL ?>embed/<?= $survey['slug'] ?>" title="View Survey & Answer" class="btn btn-sm btn-outline-primary">
                                     <i class="fa fa-eye"></i>
                                 </a>
                             </div>
@@ -57,7 +68,7 @@ include_once 'headtags.php';
                                     <i class="fa fa-chart-bar"></i> Results
                                 </a>
                                 <?php if(hasPermission("surveys", "delete", $metadata)) { ?>
-                                    <button hidden class="btn btn-sm btn-outline-danger">
+                                    <button hidden title="Delete Survey" class="btn btn-sm btn-outline-danger">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 <?php } ?>

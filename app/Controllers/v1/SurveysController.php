@@ -106,6 +106,7 @@ class SurveysController extends AccessBridge {
 
             // remove the deleted record
             $builder->whereNotIn('a.status', ['0']);
+            // $builder->orderBy('a.id', 'DESC');
 
             // apply limit and offsets
             $builder->limit($this->qr_limit, $this->qr_offset);

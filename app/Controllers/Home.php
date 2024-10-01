@@ -10,10 +10,11 @@ class Home extends AppController {
         
         $this->login_check();
 
-        // get the clients and web statistics list
-        $data['surveys_list'] = $this->api_lookup('GET', 'surveys');
         
         try {
+            
+            // get the clients and web statistics list
+            $data['surveys_list'] = $this->api_lookup('GET', 'surveys');
 
             return $this->show_display('index', $data);
 

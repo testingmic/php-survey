@@ -77,7 +77,7 @@ $atLeastOne = (bool) (hasPermission("surveys", "add", $metadata) || hasPermissio
                                 <input type='hidden' hidden id='closed_survey_text' value='<?= !empty($survey) ? htmlentities($survey['settings']['closed_survey_text']) : null ?>'>
                             </div>
                             <div class="col-md-12 mb-3">
-                                <label for="">Closed Survey</label>
+                                <label for="">Survey Footer Note</label>
                                 <trix-editor input='footer_text' class='short-height trix-slim-scroll' id='footer_info' name='settings[footer_text]'></trix-editor>
                                 <input type='hidden' hidden id='footer_text' value='<?= !empty($survey) ? htmlentities($survey['settings']['footer_text']) : null ?>'>
                             </div>

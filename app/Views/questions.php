@@ -46,9 +46,9 @@ $canDelete = hasPermission("questions", "add", $metadata);
                     <div class="new-question"></div>
                     <?php if(isset($survey['questions'])) { ?>
                         <?php if(!empty($survey['questions']) && is_array($survey['questions'])) { ?>
-                            <?php foreach($survey['questions'] as $question) { ?>
+                            <?php foreach($survey['questions'] as $i => $question) { ?>
                                 <div class="question-wrapper p-3">
-                                    <?= format_question($question, null, $slug, true, ['canEdit' => $canEdit, 'canDelete' => $canDelete]); ?>
+                                    <?= format_question($question, null, $slug, true, ['canEdit' => $canEdit, 'canDelete' => $canDelete], ($i + 1)); ?>
                                 </div>
                             <?php } ?>
                         <?php } ?>
