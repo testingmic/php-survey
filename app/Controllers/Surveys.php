@@ -665,7 +665,10 @@ class Surveys extends AppController {
                 </div>
                 <div class="form-group">
                     '.(!empty($question['instructions']) ? null : '<span onclick="return add_instruction()" class="text-primary instruction cursor">+ add instructions</span>').'
-                    <input type="text" value="'.($question['instructions'] ?? null).'" name="instructions" id="instructions" class="'.(!empty($question['instructions']) ? null : 'hidden').' form-control">
+                    <div class="instructions-container '.(!empty($question['instructions']) ? null : 'hidden').'">
+                        <label>Instructions</label>
+                        <textarea name="instructions" id="instructions" class="'.(!empty($question['instructions']) ? null : 'hidden').' form-control">'.($question['instructions'] ?? null).'</textarea>
+                    </div>
                 </div>
                 <div class="form-group mb-3 mt-3">
                     <label for="">Question Type</label>

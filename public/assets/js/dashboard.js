@@ -115,7 +115,8 @@ var cancel_update = () => {
 
 var add_instruction = () => {
     $(`span[class~="instruction"]`).remove();
-    $(`input[name="instructions"]`).removeClass("hidden");
+    $(`textarea[name="instructions"]`).removeClass("hidden");
+    $(`div[class~="instructions-container"]`).removeClass("hidden");
 }
 
 var remove_option = (option_id) => {

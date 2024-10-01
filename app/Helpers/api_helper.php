@@ -572,7 +572,7 @@ function format_question($question, $answer = null, $show_edit = false, $show_bo
         <div class='hovercontrol' data-item='hover'>
             <div class='question' data-question_id='{$question['id']}'>
                 <div class='select-notice'></div>
-                <div class='label-question mt-1'>
+                <div class='label-question mt-1' ".(!empty($question['is_required']) ? "title='Required Question'" : null).">
                     ".(!empty($question['is_required']) ? "<span class='required'>*</span>" : null)."
                     <span class='question-title'>{$question['title']}</span>
                 </div>
