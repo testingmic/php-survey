@@ -11,6 +11,7 @@
     <script src="<?= $baseURL ?>assets/js/sweetalert.js"></script>
     <script src="<?= $baseURL ?>assets/js/toastr.js"></script>
     <!-- <script src="<?= $baseURL ?>assets/js/fingerprint.js"></script> -->
+    <script src="<?= $baseURL ?>assets/js/bootstrap.js"></script>
     <script src="<?= $baseURL ?>assets/js/app.js?v=1.0.41"></script>
     <?php if(empty($surveyHasEnded)) { ?>
         <?php if(isset($surveySlug, $votersGUID, $ip_address)) { ?>
@@ -27,11 +28,7 @@
             </script>
         <?php } ?>
     <?php } ?>
-    <script src="<?= $baseURL ?>assets/js/bootstrap.js"></script>
-    <?php if(isset($manageSurvey)) { ?>
-        <script src="<?= $baseURL ?>assets/js/trix.js"></script>
-        <script src="<?= $baseURL ?>assets/js/dashboard.js?v=1.1.1"></script>
-    <?php } ?>
-    <script src="<?= $baseURL ?>assets/js/form.js"></script>
+    <script src="<?= $baseURL ?>assets/js/trix.js"></script>
+    <script src="<?= $baseURL ?>assets/js/dashboard.js?v=1.1.1"></script>
 </body>
 </html>

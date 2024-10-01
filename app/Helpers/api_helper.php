@@ -206,7 +206,10 @@ function prep($data = []) {
  * 
  * revert it back to its original format and the strip tags
  * 
- * @param Strin
+ * @param string    $string
+ * @param array     $exempt
+ * 
+ * @return string
  */
 function clean_text($string, $exempt = ['div', 'br','strong','em', 'ul', 'li', 'ol', 'p']) {
 
@@ -378,7 +381,10 @@ function is_contact($rule, $string, $variable_name = 'the variable') {
  * 
  * revert it back to its original format and the strip tags
  * 
- * @param Strin
+ * @param string    $string
+ * @param array     $exempt
+ * 
+ * @return string
  */
 function clean_tags($string, $exempt = ['div', 'br','strong','em', 'ul', 'li', 'ol', 'p']) {
 

@@ -12,6 +12,11 @@ class SurveysController extends AccessBridge {
     // reset the query limit and offsets
     private $qr_limit;
     private $qr_offset;
+
+    // parameters
+    public $parameters;
+    public $route;
+    public $endpoint;
     
     // tables list
     private $item_table = 'surveys';

@@ -12,6 +12,9 @@ class UsersController extends AccessBridge {
     private $route = "users";
     private $item_table = "users";
 
+    public $parameters;
+    public $endpoint;
+
     // reset the query limit and offsets
     private $qr_limit;
     private $qr_offset;

@@ -116,17 +116,17 @@ class AuthController extends AccessBridge {
      * 
      * @return Array
      */
-    public function access_token($userId, $schoolId = null, $username = null) {
+    public function access_token($userId, $clientId = null, $username = null) {
 
         // create the temporary accesstoken
         $token = random_string("alnum", 64);
         $expiry = date("Y-m-d H:i:s", strtotime("+{$this->token_expiry} hours"));
 
         // most recent query
-        $recent = $this->previous_token($userId, $schoolId);
+        $recent = $this->previous_token($userId, $clientId);
 
         // generate the access token
-        $access = base64_encode("{$userId}:{$username}:{$token}:{$schoolId}");
+        $access = base64_encode("{$userId}:{$username}:{$token}:{$clientId}");
 
         // if within the last 10 minutes
         if($recent) {
@@ -148,7 +148,7 @@ class AuthController extends AccessBridge {
                 $this->auth_model->db->table('users_tokens')
                         ->insert([
                             'user_id' => $userId, 'token' => $access, 'expired_at' => $expiry,
-                            'client_id' => $schoolId, 'expiry_timestamp' => strtotime($expiry), 
+                            'client_id' => $clientId, 'expiry_timestamp' => strtotime($expiry), 
                         ]);
             }
 
@@ -169,12 +169,12 @@ class AuthController extends AccessBridge {
      * 
      * @return Bool
      */
-    private function previous_token($userId, $schoolId) {
+    private function previous_token($userId, $clientId) {
 
         // run a query
         $stmt = $this->auth_model->db
                     ->table('users_tokens')
-                    ->where(['user_id' => $userId, 'status' => 'active', 'client_id' => $schoolId])
+                    ->where(['user_id' => $userId, 'status' => 'active', 'client_id' => $clientId])
                     ->orderBy('id', 'DESC')
                     ->limit(1)
                     ->get();

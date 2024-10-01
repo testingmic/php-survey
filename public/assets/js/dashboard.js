@@ -54,7 +54,7 @@ var populate_statistics = function(results = "default", question_id) {
                         <div class="progress-bar mt-1" title="${ee.count} votes">
                             <div class="progress-bar-completed" style="${ii == "skipped" ? "background: #ff5722;" : ""}width: ${ee.percentage}%;${ee.leading !== undefined ? "background: #8bc34a;": ""}"></div>
                         </div>
-                        <div class="d-flex justify-content-end" style="width:110px;font-size:14px">
+                        <div class="d-flex justify-content-end" style="width:130px;font-size:14px">
                             <div style="margin-right:10px">
                                 ${ee.count} ${label}
                             </div>
@@ -67,8 +67,14 @@ var populate_statistics = function(results = "default", question_id) {
             </div>`;
         });
         html_string += `<div class="p-2 bg-secondary">
-            <span style="font-size: 20px" class="text-white">
-                Total Votes: ${e.votes_cast}
+            <span style="font-size: 18px; margin-right: 20px" class="text-white">
+                Votes: ${e.votes_cast}
+            </span>
+            <span style="font-size: 18px; margin-right: 20px" class="text-white">
+                Skipped: ${e.skipped}
+            </span>
+            <span style="font-size: 18px; float:right" class="text-white float-right">
+                <strong>Total:</strong> ${e.votes_cast + e.skipped}
             </span>
         </div>`;
         html_string += "</div>";
@@ -206,6 +212,58 @@ var add_question = function(slug) {
         }
     });
 }
+
+var release_form = () => {
+    formoverlay.hide();
+    $(`form[class="appForm"] button[type="submit"]`).attr({'disabled': false});
+    $(`button[type="submit"]`).html(`<i class="fa fa-save"></i> Save`);
+}
+
+$(`form[class="appForm"]`).on("submit", function(evt) {
+    evt.preventDefault();
+    
+    let form = $(`form[class="appForm"]`).serializeArray();
+    let action = $(`form[class="appForm"]`).attr("action");
+
+    $(`form[class="appForm"] button[type="submit"]`).attr({'disabled': true});
+    $(`button[type="submit"]`).html(`<i class="fa fa-spin fa-spinner"></i>`);
+
+    $.each($(`trix-editor`), function() {
+        let trix_name = $(this).attr("name");
+        let trix_content = $(this).html().replace(/<!--block-->/ig, '');
+        let trix = {
+            'name': trix_name,
+            'value': _html_entities(trix_content)
+        };
+        form.push(trix);
+    });
+
+    formoverlay.show();
+    $.post(`${action}`, form).then((response) => {
+        Notify(response.data.result, responseCode(response.code));
+        if(response.code == 200) {
+            if(response.data.additional !== undefined) {
+                if(response.data.additional.clear !== undefined) {
+                    $(`form[class="appForm"] *`).val(``);
+                    $(`trix-editor`).html(``);
+                }
+                if(response.data.additional.href !== undefined) {
+                    window.location.href = `${baseURL}${response.data.additional.href}`;
+                }
+            }
+        }
+        
+        if(typeof release_form == 'function') {
+            release_form();
+        }
+
+    }).fail((err) => {
+        if(typeof release_form == 'function') {
+            release_form();
+        }
+        Notify("Sorry! An unexpected error occurred while processing the request.");
+    });
+});
 
 if($(`input[name="surveyAnalytic"]`).length) {
     let data = $(`input[name="surveyAnalytic"]`).data();

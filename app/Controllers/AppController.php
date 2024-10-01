@@ -11,6 +11,7 @@ class AppController extends ApiServices {
     public $AppAdminURL;
     public $sessObject;
     public $imageObject;
+    public $apiVersion;
     private $appIsDown = false;
     public $accepted_images_types = ".jpg,.png,.jpeg";
     public $permission_denied = "Sorry! You are not permitted to access this resource.";
@@ -18,6 +19,7 @@ class AppController extends ApiServices {
 
     public function __construct() {
 
+        $this->apiVersion = config('Api')->api_version;
         $this->sessObject = session();
         $this->imageObject = \Config\Services::image();
         $this->baseURL = trim(config('App')->baseURL, '/');
@@ -48,12 +50,12 @@ class AppController extends ApiServices {
             $data['metadata'] = [];
 
             // set the user data
-            $data['_userData'] = $this->_userData;
             $data['isLoggedIn'] = $this->is_logged_in();
+            $data['_userData'] = $this->_userData;
             
             // confirm if the user is logged in
             if( !empty($data['_userData']) ) {
-                $data['metadata'] = $data['_userData']['metadata'];
+                $data['metadata'] = $data['_userData']['metadata'] ?? [];
             }
             
             // show the page
@@ -71,6 +73,8 @@ class AppController extends ApiServices {
     public function is_logged_in() {
         
         if(!empty($this->sessObject->_userApiToken) && !empty($this->sessObject->_clientId) && !empty($this->sessObject->_userId)) {
+            $authObject = new \App\Controllers\v1\AuthController();
+            $this->_userData = $authObject->user_data($this->sessObject->_userId, $this->apiVersion, $this->sessObject->_userApiToken);
             return true;
         }
 

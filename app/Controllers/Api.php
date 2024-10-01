@@ -553,7 +553,7 @@ class Api extends BaseController {
             // if the class and method is to verify
             if(in_array($class_and_method, ['auth/verify'])) {
                 $authController = new \App\Controllers\Auth();
-                $request = $authController->verify($request, $params['ci_session']);
+                // $request = $authController->verify($request, $params['ci_session']);
             }
             
             // set the response code to return

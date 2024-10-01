@@ -177,6 +177,7 @@ class Surveys extends AppController {
 
         $result = [];
         $round = $param['round'] ?? 0;
+        $result['summary']['skipped'] = 0;
         $result['summary']['votes_count'] = (int) $survey['submitted_answers'];
         $result['summary']['questions_count'] = count($survey['questions']);
         
@@ -226,13 +227,17 @@ class Surveys extends AppController {
             $item['counts'] = !empty($item['answers'][$ikey]['votes']) ? json_decode($item['answers'][$ikey]['votes'], true) : [];
             
             $original = $item['counts'];
+
             unset($original['skipped']);
             $total_valids = array_sum($original);
             
             $item['grouping'] = combine_array($item['options'], $item['counts'], $total_valids);
             $item['votes_cast'] = array_sum(array_column($item['grouping'], 'count'));
 
+            $item['skipped'] = 0;
             if(isset($item['counts']['skipped'])) {
+                // update the skipped value
+                $item['skipped'] = $item['counts']['skipped'];
                 unset($item['counts']['skipped']);
             }
 
