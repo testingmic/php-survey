@@ -656,67 +656,71 @@ class Surveys extends AppController {
         }
 
         $form = '
-        <form method="POST" action="'.config('App')->baseURL.'surveys/savequestion" class="questionForm">
-            <div class="bg-light p-3 position-relative">
-                '.form_overlay().'
-                <div class="form-group mb-2">
-                    <label for="">Question</label>
-                    <input value="'.($question['title'] ?? null).'" type="text" name="title" id="title" class="form-control">
-                </div>
-                <div class="form-group">
-                    '.(!empty($question['instructions']) ? null : '<span onclick="return add_instruction()" class="text-primary instruction cursor">+ add instructions</span>').'
-                    <div class="instructions-container '.(!empty($question['instructions']) ? null : 'hidden').'">
-                        <label>Instructions</label>
-                        <textarea name="instructions" id="instructions" class="'.(!empty($question['instructions']) ? null : 'hidden').' form-control">'.($question['instructions'] ?? null).'</textarea>
-                    </div>
-                </div>
-                <div class="form-group mb-3 mt-3">
-                    <label for="">Question Type</label>
-                    <select name="answer_type" id="answer_type" class="selectpicker form-control">
-                        <option value="multiple">Multiple Choice</option>
-                    </select>
-                </div>
-                <div class="question-option">
-                    <label for="">Options</label>
-                    <div class="option-container" id="question_id_'.$quid.'">';
-                    if(!empty($question['options'])) {
-                        foreach($question['options'] as $key => $option) {
-                            $key++;
-                            $option = !empty($question_id) ? $option : null;
-                            $form .= '
-                            <div class="form-group mb-2" data-question="'.$quid.'" data-option_id="'.$key.'">
-                                <div class="d-flex justify-content-between">
-                                    <div class="col-11">
-                                        <input type="text" value="'.$option.'" name="option['.$key.']" id="option['.$key.']" class="form-control">
-                                    </div>
-                                    <div>
-                                        <button type="button" onclick="return remove_option(\''.$key.'\')" class="btn btn-outline-danger btn-sm">
-                                            <i class="fa fa-times-circle"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>';
-                        }
-                    }
+        <div class="p-3">
+            <div class="new-question-container">
+                <form method="POST" action="'.config('App')->baseURL.'surveys/savequestion" class="questionForm">
+                    <div class="bg-light p-3 position-relative">
+                        '.form_overlay().'
+                        <div class="form-group mb-2">
+                            <label for="">Question</label>
+                            <input value="'.($question['title'] ?? null).'" type="text" name="title" id="title" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            '.(!empty($question['instructions']) ? null : '<span onclick="return add_instruction()" class="text-primary instruction cursor">+ add instructions</span>').'
+                            <div class="instructions-container '.(!empty($question['instructions']) ? null : 'hidden').'">
+                                <label>Instructions</label>
+                                <textarea name="instructions" id="instructions" class="'.(!empty($question['instructions']) ? null : 'hidden').' form-control">'.($question['instructions'] ?? null).'</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 mt-3">
+                            <label for="">Question Type</label>
+                            <select name="answer_type" id="answer_type" class="selectpicker form-control">
+                                <option value="multiple">Multiple Choice</option>
+                            </select>
+                        </div>
+                        <div class="question-option">
+                            <label for="">Options</label>
+                            <div class="option-container" id="question_id_'.$quid.'">';
+                            if(!empty($question['options'])) {
+                                foreach($question['options'] as $key => $option) {
+                                    $key++;
+                                    $option = !empty($question_id) ? $option : null;
+                                    $form .= '
+                                    <div class="form-group mb-2" data-question="'.$quid.'" data-option_id="'.$key.'">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="col-11">
+                                                <input type="text" value="'.$option.'" name="option['.$key.']" id="option['.$key.']" class="form-control">
+                                            </div>
+                                            <div>
+                                                <button type="button" onclick="return remove_option(\''.$key.'\')" class="btn btn-outline-danger btn-sm">
+                                                    <i class="fa fa-times-circle"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>';
+                                }
+                            }
 
-            $form .=  '
+                    $form .=  '
+                            </div>
+                            <span class="text-primary cursor" onclick="return add_option('.$question_id.')">+ add option</span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="is_required" class="cursor">
+                                <input type="checkbox" '.(!empty($question['is_required']) ? "checked" : null).' name="is_required" id="is_required">
+                                Required question
+                            </label>
+                        </div>
+                        <div class="form-group mt-3">
+                            <input readonly type="hidden" name="question_id" value="'.$question_id.'">
+                            <input readonly type="hidden" name="survey_id" value="'.$survey['id'].'">
+                            <button class="btn btn-success min-100 pr-5" type="submit">Save</button>
+                            <span class="text-primary cursor" onclick="return cancel_update()">Cancel</span>
+                        </div>
                     </div>
-                    <span class="text-primary cursor" onclick="return add_option('.$question_id.')">+ add option</span>
-                </div>
-                <div class="form-group mt-2">
-                    <label for="is_required" class="cursor">
-                        <input type="checkbox" '.(!empty($question['is_required']) ? "checked" : null).' name="is_required" id="is_required">
-                        Required question
-                    </label>
-                </div>
-                <div class="form-group mt-3">
-                    <input readonly type="hidden" name="question_id" value="'.$question_id.'">
-                    <input readonly type="hidden" name="survey_id" value="'.$survey['id'].'">
-                    <button class="btn btn-success min-100 pr-5" type="submit">Save</button>
-                    <span class="text-primary cursor" onclick="return cancel_update()">Cancel</span>
-                </div>
+                </form>
             </div>
-        </form';
+        </div>';
 
         return $this->api_response(['result' => $form, 'code' => 200]);
         

@@ -30,10 +30,20 @@ $canDelete = hasPermission("questions", "add", $metadata);
     <div class="row mb-4 pb-3">
         <div class="col-lg-12 mt-2">
             <div class="card">
-                <div class="card-header">
-                    <h3><?= $survey['title'] ?></h3>
+                <div class="card-header d-flex justify-content-between">
+                    <div><h3><?= $survey['title'] ?></h3></div>
+                    <div>
+                        <?php if(hasPermission("questions", "update", $metadata)) { ?>
+                            <div class="text-center w-100">
+                                <button onclick="return add_question('<?= $slug; ?>')" class="btn btn-secondary">
+                                    <i class="fa fa-plus"></i> Add Question
+                                </button>
+                            </div>
+                        <?php } ?>
+                    </div>
                 </div>
                 <div class="card-body bg-white">
+                    <div class="new-question"></div>
                     <?php if(isset($survey['questions'])) { ?>
                         <?php if(!empty($survey['questions']) && is_array($survey['questions'])) { ?>
                             <?php foreach($survey['questions'] as $question) { ?>
@@ -43,17 +53,7 @@ $canDelete = hasPermission("questions", "add", $metadata);
                             <?php } ?>
                         <?php } ?>
                     <?php } ?>
-                    <div class="p-3">
-                        <div class="new-question"></div>
-                    </div>
                 </div>
-                <?php if(hasPermission("questions", "update", $metadata)) { ?>
-                <div class="card-footer text-center w-100">
-                    <button onclick="return add_question('<?= $slug; ?>')" class="btn btn-secondary">
-                        <i class="fa fa-plus"></i> Add Question
-                    </button>
-                </div>
-                <?php } ?>
             </div>
         </div>
     </div>

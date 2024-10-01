@@ -121,7 +121,7 @@ $atLeastOne = (bool) (hasPermission("surveys", "add", $metadata) || hasPermissio
                             <?php } ?>
                             <?php if($atLeastOne) { ?>
                             <div class="col-md-12 text-center mt-4">
-                                <button class="btn min-150 btn-success" type="submit"><i class="fa fa-save"></i> Save</button>
+                                <button class="btn min-150 btn-success" type="submit"><i class="fa fa-save"></i> Save Survey</button>
                             </div>
                             <?php } ?>
                         </div>

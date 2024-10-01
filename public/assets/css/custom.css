@@ -19,6 +19,10 @@
     opacity: 0
 }
 
+.new-question-container {
+    box-shadow: 2px -1px 2px 2px #b8b7b7;
+}
+
 .visually-hidden {
     border: 0;
     clip: rect(0 0 0 0);
