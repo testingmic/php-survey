@@ -706,14 +706,14 @@ function dashboard_header($baseURL = null, $signup = true) {
             <p class="header-subtitle">
                 Get better insights faster—with expert templates, helpful AI, and convenient ways to reach more people.
             </p>
-            <div class="header-image mt-5">
-                <a href="'.$baseURL.''.($signup ? 'signup' : 'login').'" class="btn '.(!$signup ? 'hidden' : null).' signup-button">
+            <div class="header-image mt-4">
+                <a href="'.$baseURL.''.($signup ? 'signup' : 'login').'" class="btn mb-2 '.(!$signup ? 'hidden' : null).' signup-button">
                     <i class="fa fa-user-cog"></i> Sign Up for Free
                 </a>
-                <a href="'.$baseURL.'login" class="btn '.($signup && $signup !== 'both' ? 'hidden' : null).' login-button">
+                <a href="'.$baseURL.'login" class="btn mb-2 '.($signup && $signup !== 'both' ? 'hidden' : null).' login-button">
                     <i class="fa fa-user"></i> Login Into Your Account
                 </a>
-                <div class="border-bottom mt-4 mb-4"></div>
+                <div class="border-bottom mt-2 mb-2"></div>
             </div>
         </div>';
 }
