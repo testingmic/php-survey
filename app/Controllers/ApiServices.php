@@ -183,6 +183,9 @@ class ApiServices extends BaseController {
 
 		// set the primary key
 		$primary_key = $params['primary_key'] ?? $primary_key;
+
+		// set the client id
+		$params['client_id'] = $params['_userData']['client_id'] ?? null;
             
 		// set additional parameters
 		$params['user_agent'] = $this->user_agent;
