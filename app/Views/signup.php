@@ -3,7 +3,7 @@ include_once 'headtags.php';
 
 global $AppName, $baseURL;
 ?>
-<?= dashboard_header($baseURL, false) ?>
+<?= dashboard_header($baseURL, false, $isLoggedIn) ?>
 <div class='dialog-container'>
     <div class='card card-width mb-5'>
         <div class='card-content text-center position-relative'>
