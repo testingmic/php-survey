@@ -62,6 +62,10 @@ class AuthController extends AccessBridge {
                 // set the response
                 $response['user'] = $this->user_data($data[0]['id'], $params['version']);
 
+                if(empty($response['user'])) {
+                    return 'Sorry! The credentials could not be authenticated.';
+                }
+
                 // delete the password if exists
                 if(isset($response['user']['password'])) {
                     unset($response['user']['password']);
@@ -107,6 +111,7 @@ class AuthController extends AccessBridge {
             }
 
         } catch(\Exception $e) {
+            return $e->getMessage();
             return [];
         }
 

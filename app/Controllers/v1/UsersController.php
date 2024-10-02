@@ -166,10 +166,8 @@ class UsersController extends AccessBridge {
             $where_clause = !empty($unique_id) ? ['a.id' => $unique_id] : $params;
 
             $data = $this->db_model->db->table('users a')
-                                    ->select('a.*, s.name AS school_name, s.fee_payment, s.logo,
-                                        s.email as school_email, s.address as school_address, 
-                                        s.phone as school_contact, s.school_code, s.alt_phone as school_altcontact,
-                                        s.settings as client_settings, g.name AS group_name
+                                    ->select('a.*, s.name, s.fee_payment, s.logo,
+                                        s.email, s.address, s.phone, s.settings, g.name AS group_name
                                     ')
                                     ->where($where_clause)
                                     ->join('clients s', 's.id = a.client_id', 'left')
