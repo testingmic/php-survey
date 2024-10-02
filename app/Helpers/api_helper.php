@@ -31,6 +31,22 @@ function string_to_array($string, $delimiter = ",", $key_name = [], $allowEmpty 
 }
 
 /**
+ * Check if the value is required
+ * 
+ * @param String $rule
+ * @param String $string
+ * @param String $variable_name
+ * 
+ * @return String
+ */
+function required($rule, $string, $variable_name = 'the variable') {
+    if(empty($string)) {
+        return "The ".ucwords($variable_name)." must not be empty";
+    }
+    return true;
+}
+
+/**
  * Get the items that are acceptable by the file upload button
  * 
  * @param String $key

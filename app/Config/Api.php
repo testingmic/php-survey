@@ -34,7 +34,7 @@ class Api extends BaseConfig
      * @return Array
      */
     public $putAppend = [
-        'login', 'verify', 'submitform', 'receivepin', 'register',
+        'login', 'signup', 'verify', 'submitform', 'receivepin', 'register',
         'updatequestion', 'createquestion', 'deletequestion'
     ];
 

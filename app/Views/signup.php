@@ -11,16 +11,20 @@ global $AppName, $baseURL;
             <h3 class="border-bottom pb-2 border-primary">Create an Account</h3>
             <form class="appForm" action="<?= $baseURL ?>api/auth/signup">
                 <div class="form-group mb-3">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username" class="form-control text-center">
-                </div>
-                <div class="form-group mb-2">
-                    <label for="email">Email Address</label>
-                    <input type="email" name="email" id="email" class="form-control text-center">
+                    <label for="company">Company Name <span class="required">*</span></label>
+                    <input type="text" name="company" maxlength="64" id="company" class="form-control text-center">
                 </div>
                 <div class="form-group mb-3">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" class="form-control text-center">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" name="phone" maxlength="16" id="phone" class="form-control text-center">
+                </div>
+                <div class="form-group mb-2">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" name="email" maxlength="64" id="email" class="form-control text-center">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="password">Password <span class="required">*</span></label>
+                    <input type="password" name="password" maxlength="32" id="password" class="form-control text-center">
                 </div>
                 <div class="form-group">
                     <button class="btn btn-success signup-button"><i class="fa fa-user-cog"></i> Create Account</button>

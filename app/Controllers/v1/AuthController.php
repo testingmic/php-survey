@@ -3,15 +3,18 @@ namespace App\Controllers\v1;
 
 use App\Controllers\AccessBridge;
 use App\Models\v1\AuthModel;
+use App\Models\v1\ClientModel;
 
 class AuthController extends AccessBridge {
 
     private $auth_model;
+    private $client_model;
     private $token_expiry = 12;
 
     public function __construct()
     {
         $this->auth_model = new AuthModel;
+        $this->client_model = new ClientModel;
     }
 
     /**
@@ -44,9 +47,9 @@ class AuthController extends AccessBridge {
                 if($data[0]['status'] !== '1') {
                     return lang('Errors.invalidCredential');
                 }
-                
+
                 // verify the user password
-                if(password_verify($params['password'], $data[0]['password'])) {
+                if(!password_verify($params['password'], $data[0]['password'])) {
                     return lang('Errors.invalidCredential');
                 }
 
@@ -100,6 +103,84 @@ class AuthController extends AccessBridge {
                     'code' => 200, 
                     'result' => 'Login was successful.',
                     'additional' => $response
+                ];
+            }
+
+        } catch(\Exception $e) {
+            return [];
+        }
+
+    }
+
+    /**
+     * Signup Page
+     * 
+     * @param       Array   $params['username']
+     * @param       Array   $params['password']
+     * @param       Array   $params['email']
+     * 
+     * @return String
+     */
+    public function signup(array $params) {
+
+        try {
+
+            // set the username
+            $params['username'] = !empty($params['username']) ? $params['username'] : $params['email'];
+
+            // check if the username or email already exists
+            $data = $this->auth_model->where('username', $params['username'])
+                                    ->orWhere('email', $params['email'])
+                                    ->limit(1)
+                                    ->get();
+
+            // get the result
+            $check = !empty($data) ? $data->getResultArray() : [];
+
+            if(!empty($check)) {
+                return 'Sorry! The username or email already exists.';
+            }
+
+            // set the password
+            $params['password'] = password_hash($params['password'], PASSWORD_DEFAULT);
+
+            // set the group id
+            $params['group_id'] = !empty($params['group_id']) ? $params['group_id'] : 1;
+            $params['client_id'] = !empty($params['client_id']) ? $params['client_id'] : 0;
+
+            // set the status
+            $params['status'] = '1';
+
+            // if the client id is not set
+            if(empty($params['client_id'])) {
+                // insert the client
+                $params['name'] = empty($params['name']) ? $params['company'] : $params['name'];
+                $clientId = $this->client_model->insert($params);
+                $params['client_id'] = $clientId;
+            }
+
+            // insert the data
+            $insertId = $this->auth_model->insert($params);
+
+            // if the insert was successful
+            if(!empty($insertId)) {
+
+                // get the user data
+                $permissions = $this->auth_model->db->table('users_groups')->where('id', $params['group_id'])->get()->getRow();
+                if(!empty($permissions)) {
+                    $this->auth_model
+                        ->db->query("INSERT INTO users_metadata (user_id, client_id, name, value)
+                            VALUES ({$insertId}, {$params['client_id']}, 'permissions', '{$permissions->permissions}')");
+                }
+
+                return [
+                    'code' => 200,
+                    'result' => 'Signup was successful.',
+                    'additional' => [
+                        'clear' => true,
+                        'href' => 'login',
+                        'permissions' => $permissions
+                    ]
                 ];
             }
 

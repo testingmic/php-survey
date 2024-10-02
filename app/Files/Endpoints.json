@@ -61,6 +61,13 @@
 			"login": {
 				"username": "required|max_length=64",
 				"password": "required|max_length=32"
+			},
+			"signup": {
+				"username": "max_length=64",
+				"password": "required|max_length=32",
+				"email": "required|max_length=64",
+				"company": "required|max_length=64",
+				"phone": "max_length=20"
 			}
 		}
 	}

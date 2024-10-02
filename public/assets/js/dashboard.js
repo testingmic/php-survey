@@ -148,7 +148,9 @@ var save_question = () => {
                         $(`form[class="appForm"] *`).val(``);
                     }
                     if(response.data.additional.href !== undefined) {
-                        window.location.href = `${baseURL}${response.data.additional.href}`;
+                        setTimeout(() => {
+                            window.location.href = `${baseURL}${response.data.additional.href}`;
+                        }, 2000);
                     }
                     if(response.data.additional.question) {
                         $(`div[class~='questionnaire'][data-question_id='${selectedQuestion}']`).html(response.data.additional.question);
@@ -249,7 +251,9 @@ $(`form[class="appForm"]`).on("submit", function(evt) {
                     $(`trix-editor`).html(``);
                 }
                 if(response.data.additional.href !== undefined) {
-                    window.location.href = `${baseURL}${response.data.additional.href}`;
+                    setTimeout(() => {
+                        window.location.href = `${baseURL}${response.data.additional.href}`;
+                    }, 2000);
                 }
             }
         }

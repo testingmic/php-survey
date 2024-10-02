@@ -454,7 +454,7 @@ class Api extends BaseController {
         $class_and_method = "{$this->inner_url}/{$this->class_method}";
 
         // set the request as having been authorized
-        if(in_array($class_and_method, ['auth/verify', 'auth/login', 'users/resetpassword'])) {
+        if(in_array($class_and_method, ['auth/verify', 'auth/login', 'auth/signup', 'auth/forgotten', 'users/resetpassword'])) {
             $authorized = true;
         }
 
