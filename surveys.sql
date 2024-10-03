@@ -42,7 +42,7 @@ CREATE TABLE `activities` (
   `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `state` enum('pending','processed') NOT NULL DEFAULT 'pending',
   `status` enum('0','1') DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -56,13 +56,13 @@ CREATE TABLE `clients` (
   `logo` varchar(255) DEFAULT 'writable/uploads/default_logo.png',
   `address` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `phone` varchar(22) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `phone` varchar(22) CHARACTER SET utf8mb4 DEFAULT NULL,
   `fee_payment` varchar(5) DEFAULT '20',
   `settings` text,
   `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_updated` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status` enum('0','1','2') DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `clients`
@@ -89,7 +89,7 @@ CREATE TABLE `login_history` (
   `ip_address` varchar(255) DEFAULT NULL,
   `user_agent` varchar(255) DEFAULT NULL,
   `user_id` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `login_history`
@@ -191,7 +191,7 @@ CREATE TABLE `surveys` (
   `is_published` enum('0','1') NOT NULL DEFAULT '1',
   `users_logs` text,
   `created_by` varchar(32) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `surveys`
@@ -221,7 +221,7 @@ CREATE TABLE `surveys_questions` (
   `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` enum('0','1') NOT NULL DEFAULT '1',
   `created_by` varchar(32) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `surveys_questions`
@@ -269,7 +269,7 @@ CREATE TABLE `surveys_votes` (
   `survey_id` tinyint UNSIGNED DEFAULT NULL,
   `question_id` tinyint UNSIGNED DEFAULT NULL,
   `votes` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `surveys_votes`
@@ -321,7 +321,7 @@ CREATE TABLE `users` (
   `date_updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status` enum('0','1','2') DEFAULT '1',
   `deactivated` enum('0','1') NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -355,7 +355,7 @@ CREATE TABLE `users_groups` (
   `id` int UNSIGNED NOT NULL,
   `name` varchar(32) DEFAULT NULL,
   `permissions` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users_groups`
@@ -378,7 +378,7 @@ CREATE TABLE `users_metadata` (
   `name` char(40) DEFAULT NULL,
   `value` text,
   `status` enum('0','1','2') DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users_metadata`
@@ -410,7 +410,7 @@ CREATE TABLE `users_tokens` (
   `expired_at` datetime DEFAULT NULL,
   `expiry_timestamp` varchar(16) DEFAULT NULL,
   `status` varchar(12) DEFAULT 'active'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users_tokens`

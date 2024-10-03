@@ -37,9 +37,10 @@ $routes->get('/dashboard', 'Home::dashboard');
 // pages routes
 $routes->get('/login', 'Pages::login');
 $routes->get('/signup', 'Pages::signup');
-$routes->get('/account', 'Pages::account');
-$routes->get('/support', 'Pages::support');
-$routes->get('/billing', 'Pages::billing');
+$routes->get('/account', 'Pages::page/account');
+$routes->get('/support', 'Pages::page/support');
+$routes->get('/billing', 'Pages::page/billing');
+$routes->get('/transaction', 'Pages::page/transaction');
 
 // surveys routes
 $routes->get('/embed', 'Surveys::embed');

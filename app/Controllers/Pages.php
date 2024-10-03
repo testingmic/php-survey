@@ -7,16 +7,27 @@ use App\Controllers\AppController;
 class Pages extends AppController {
 
     /**
-     * Account Page
+     * Page
+     * 
+     * @param String $page
      * 
      * @return String
      */
-    public function account() {
+    public function page($page) {
         // check if the user is logged in
         $this->login_check();
 
+        // page check
+        $data['page'] = $page;
+
+        // pages
+        $data['pages'] = [
+            'account' => 'Account Summary',
+            'billing' => 'Billing Details',
+            'transaction' => 'Transaction History'
+        ];
         // get the user data
-        return $this->show_display('account');
+        return $this->show_display($page, $data);
     }
 
     /**
