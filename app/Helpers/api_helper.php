@@ -708,10 +708,11 @@ function form_overlay($display = "none") {
  * 
  * @param String    $baseURL
  * @param Bool      $signup
+ * @param Bool      $isLoggedIn
  * 
  * @return String
  */
-function dashboard_header($baseURL = null, $signup = true) {
+function dashboard_header($baseURL = null, $signup = true, $isLoggedIn = false) {
     return '
         <div class="text-center top-section">
             <div class="header-container">
@@ -723,12 +724,17 @@ function dashboard_header($baseURL = null, $signup = true) {
                 Get better insights faster—with expert templates, helpful AI, and convenient ways to reach more people.
             </p>
             <div class="header-image mt-4">
-                <a href="'.$baseURL.''.($signup ? 'signup' : 'login').'" class="btn mb-2 '.(!$signup ? 'hidden' : null).' signup-button">
-                    <i class="fa fa-user-cog"></i> Sign Up for Free
-                </a>
-                <a href="'.$baseURL.'login" class="btn mb-2 '.($signup && $signup !== 'both' ? 'hidden' : null).' login-button">
-                    <i class="fa fa-user"></i> Login Into Your Account
-                </a>
+                '.(!$isLoggedIn ? '
+                    <a href="'.$baseURL.''.($signup ? 'signup' : 'login').'" class="btn mb-2 '.(!$signup ? 'hidden' : null).' signup-button">
+                        <i class="fa fa-user-cog"></i> Sign Up for Free
+                    </a>
+                    <a href="'.$baseURL.'login" class="btn mb-2 '.($signup && $signup !== 'both' ? 'hidden' : null).' login-button">
+                        <i class="fa fa-user"></i> Login Into Your Account
+                    </a>' : '
+                    <a href="'.$baseURL.'dashboard" class="btn mb-2 signup-button">
+                        <i class="fa fa-home"></i> Go to Dashboard
+                    </a>'
+                ).'
                 <div class="border-bottom mt-2 mb-2"></div>
             </div>
         </div>';

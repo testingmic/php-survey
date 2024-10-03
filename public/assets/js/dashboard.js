@@ -6,7 +6,7 @@ var _html_entities = (str) => {
 
 var add_option = (question_id = 'new_question') => {
     let data = $(`div[class="option-container"][id="question_id_${question_id}"] div[data-option_id]:last`).data();
-    let next_row = data.option_id !== undefined ? (data.option_id + 1) : 1;
+    let next_row = typeof data !=='undefined' && typeof data.option_id !== 'undefined' ? (data.option_id + 1) : 1;
 
     let option_row = `
     <div class="form-group mb-2" data-question="${question_id}" data-option_id="${next_row}">

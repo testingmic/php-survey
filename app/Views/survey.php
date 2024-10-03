@@ -14,14 +14,11 @@ $atLeastOne = (bool) (hasPermission("surveys", "add", $metadata) || hasPermissio
             <a class="btn btn-outline-primary btn-sm" href="<?= $baseURL ?>dashboard">
                 <i class="fa fa-list"></i> List Surveys
             </a>
-            <?php if( !empty($isFound) && hasPermission("surveys", "add", $metadata)) { ?>
-                <a class="btn btn-sm btn-outline-success" href="<?= $baseURL ?>surveys/modify/add">
-                    <i class="fa fa-place-of-worship"></i> New Survey 
+            <?php if( !empty($isFound) && hasPermission("surveys", "update", $metadata)) { ?>
+                <a class="btn btn-sm btn-outline-success" href="<?= $baseURL ?>embed/<?= $slug ?>/results">
+                    <i class="fa fa-chart-pie"></i> Analyze Survey Results
                 </a>
             <?php } ?>
-            <a class="btn btn-sm btn-primary" title="Dashboard" href="<?= $baseURL ?>">
-                <i class="fa fa-home"></i>
-            </a>
         </div>
     </div>
     <div class="row mb-4 pb-3">
@@ -40,13 +37,10 @@ $atLeastOne = (bool) (hasPermission("surveys", "add", $metadata) || hasPermissio
                             <div>
                                 <?php if(!empty($slug)) { ?>
                                     <?php if(hasPermission("questions", "add", $metadata) || hasPermission("questions", "update", $metadata)) { ?>
-                                        <a class="btn btn-secondary btn-sm" href="<?= $baseURL ?>surveys/modify/<?= !$isFound ? "add" : "{$slug}/questions" ?>">
+                                        <a class="btn btn-secondary btn-button btn-sm" href="<?= $baseURL ?>surveys/modify/<?= !$isFound ? "add" : "{$slug}/questions" ?>">
                                             Survey Questions
                                         </a>
                                     <?php } ?>
-                                    <a class="btn btn-sm btn-outline-warning" target="_blank" href="<?= $baseURL ?>embed/<?= $slug ?>">
-                                        <i class="fa fa-home"></i> Preview
-                                    </a>
                                 <?php } ?>
                             </div>
                         </div>
@@ -57,9 +51,17 @@ $atLeastOne = (bool) (hasPermission("surveys", "add", $metadata) || hasPermissio
                             <div class="col-md-12 border-bottom mb-3 border-primary">
                                 <h5 class="text-primary text-uppercase">Survey Information</h5>
                             </div>
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-8 mb-3">
                                 <label for="">Survey Title <span class="required">*</span></label>
                                 <input type="text" name="title" class="form-control" value="<?= $survey['title'] ?? null ?>">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="">Category <span class="required">*</span></label>
+                                <select name="category" id="surveyCategory" class="form-control">
+                                    <?php foreach($surveyCategories as $key => $value) { ?>
+                                        <option value="<?= $key ?>" <?= !empty($survey) && $survey['category'] == $key ? "selected" : null; ?>><?= $value ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
                             <div class="col-lg-12 mb-3">
                                 <label for="">Description <span class="required">*</span></label>
@@ -120,9 +122,20 @@ $atLeastOne = (bool) (hasPermission("surveys", "add", $metadata) || hasPermissio
                             <input type="hidden" readonly name="survey_id" value="<?= $survey['id'] ?? null ?>">
                             <?php } ?>
                             <?php if($atLeastOne) { ?>
-                            <div class="col-md-12 text-center mt-4">
-                                <button class="btn min-150 btn-success" type="submit"><i class="fa fa-save"></i> Save Survey</button>
-                            </div>
+                                <div class="col-md-12 mt-4 border-top pt-4">
+                                    <div class="row">
+                                        <div class="col-md-6 preview-button">
+                                            <?php if(!empty($slug)) { ?>
+                                                <a class="btn btn-sm btn-outline-warning btn-button mb-1" target="_blank" href="<?= $baseURL ?>embed/<?= $slug ?>">
+                                                    <i class="fa fa-eye"></i> Preview Survey
+                                                </a>
+                                            <?php } ?>
+                                        </div>
+                                        <div class="col-md-6 save-button">
+                                            <button class="btn min-150 btn-success signup-button mb-1" type="submit"><i class="fa fa-save"></i> Save Survey</button>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php } ?>
                         </div>
                     </div>

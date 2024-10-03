@@ -81,10 +81,10 @@ $Route = $SPLIT[0];
                                             <a href="<?= $baseURL ?>dashboard" class="dropdown-item">
                                                 <i class="fa fa-home"></i> Dashboard
                                             </a>
-                                            <a href="<?= $baseURL ?>account/settings" class="dropdown-item">
-                                                <i class="fa fa-cog"></i> Account Settings
+                                            <a href="<?= $baseURL ?>account" class="dropdown-item">
+                                                <i class="fa fa-cog"></i> Account
                                             </a>
-                                            <a href="<?= $baseURL ?>account/support" class="dropdown-item">
+                                            <a href="<?= $baseURL ?>accountsupport" class="dropdown-item">
                                             <i class="fa fa-life-ring"></i> Support
                                             </a>
                                             <div class="dropdown-divider"></div>

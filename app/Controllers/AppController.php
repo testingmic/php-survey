@@ -17,6 +17,28 @@ class AppController extends ApiServices {
     public $permission_denied = "Sorry! You are not permitted to access this resource.";
     public $processing_error = "Sorry! An unexpected error was encountered while processing the request.";
 
+    // Survey Categories
+    public $surveyCategories = [
+        0  => "Select a Category",
+        1  => "Community or volunteer feedback",
+        2  => "Customer feedback",
+        3  => "Concept, product, or ad testing",
+        4  => "Brand tracking or awareness",
+        5  => "General market research",
+        6  => "Employee engagement",
+        7  => "Employee performance",
+        8  => "General employee feedback",
+        9  => "Event registration",
+        10 => "Event feedback",
+        11 => "Academic research",
+        12 => "Course evaluation",
+        13 => "Student or parent feedback",
+        14 => "Quiz",
+        15 => "Other",
+        16 => "Form or application",
+        17 => "Vote or poll"
+    ];
+
     public function __construct() {
 
         $this->apiVersion = config('Api')->api_version;

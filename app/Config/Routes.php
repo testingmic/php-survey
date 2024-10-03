@@ -20,7 +20,7 @@ $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
-$routes->set404Override('\App\Controllers\Home::not_found');
+$routes->set404Override('\App\Controllers\Pages::not_found');
 $routes->setAutoRoute(false);
 
 /*
@@ -32,13 +32,21 @@ $routes->setAutoRoute(false);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('/login', 'Home::login');
-$routes->get('/signup', 'Home::signup');
-$routes->get('/embed', 'Surveys::embed');
 $routes->get('/dashboard', 'Home::dashboard');
+
+// pages routes
+$routes->get('/login', 'Pages::login');
+$routes->get('/signup', 'Pages::signup');
+$routes->get('/account', 'Pages::account');
+$routes->get('/support', 'Pages::support');
+$routes->get('/billing', 'Pages::billing');
+
+// surveys routes
+$routes->get('/embed', 'Surveys::embed');
 $routes->post('/surveys/save', 'Surveys::save');
 $routes->get('/embed/(:any)', 'Surveys::embed/$1/$2');
 
+// surveys routes
 $routes->get('/surveys/results(:any)', 'Surveys::results');
 $routes->post('/surveys/show_question', 'Surveys::question');
 $routes->post('/surveys/savequestion', 'Surveys::savequestion');
@@ -47,9 +55,8 @@ $routes->post('/surveys/deletequestion/(:num)', 'Surveys::deletequestion/$1');
 $routes->get('/surveys/loadquestion/(:any)', 'Surveys::loadquestion/$1/$2');
 $routes->post('/surveys/savefingerprint/(:any)', 'Surveys::savefingerprint/$1');
 
-
+// logout routes
 $routes->post('/auth/logout', 'Auth::logout');
-
 
 // command line commands
 $routes->cli('root/(:any)', 'Crontab::jobs/$1');

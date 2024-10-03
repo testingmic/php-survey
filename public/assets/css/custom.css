@@ -350,6 +350,45 @@ time:hover {
     margin: auto auto;
 }
 
+.preview-button {
+    text-align: left;
+}
+
+.save-button {
+    text-align: right;
+}
+
+@media (max-width:700px) {
+    .preview-button {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    
+    .save-button {
+        text-align: center;
+    }
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.btn-button {
+    width: 300px;
+    border-radius: 4px;
+    height: 50px;
+    padding: 12px;
+}
+
+.btn-outline-warning:hover {
+    background-color: #ffc107;
+    color: #fff;
+}
+
 .signup-button {
     background-color: #00bf6f;
     color: #fff;
@@ -357,6 +396,17 @@ time:hover {
     border-radius: 4px;
     height: 50px;
     padding: 12px;
+}
+
+.btn-success {
+    background-color: #00bf6f;
+    color: #fff;
+}
+
+.btn-outline-success {
+    background-color: #fff;
+    color: #00bf6f;
+    border: 1px solid #00bf6f;
 }
 
 .login-button {

@@ -24,6 +24,9 @@ class Surveys extends AppController {
         $data['slug'] = null;
         $file = 'survey';
 
+        // get the survey categories
+        $data['surveyCategories'] = $this->surveyCategories;
+
         if( $slug == 'add') {
             $data['pagetitle'] = "New Survey";
         }
@@ -146,6 +149,9 @@ class Surveys extends AppController {
             $data['manageSurvey'] = true;
         }
 
+        // get the survey categories
+        $data['surveyCategories'] = $this->surveyCategories;
+
         // display the page
         return $this->show_display('embed', $data);
     }
@@ -180,6 +186,9 @@ class Surveys extends AppController {
         $result['summary']['skipped'] = 0;
         $result['summary']['votes_count'] = (int) $survey['submitted_answers'];
         $result['summary']['questions_count'] = count($survey['questions']);
+
+        // get the survey categories
+        $data['surveyCategories'] = $this->surveyCategories;
         
         function regroup_keys($array = []) {
             if( empty($array) ) {
@@ -824,7 +833,7 @@ class Surveys extends AppController {
         $endpoint = "surveys";
         $params = array_map('esc', $this->request->getPost());
 
-        foreach(['title', 'description', 'button_text'] as $item) {
+        foreach(['title', 'description', 'button_text', 'category'] as $item) {
             if(empty($params[$item])) {
                 return $this->error("Sorry the {$item} is required.");
             }
@@ -838,7 +847,7 @@ class Surveys extends AppController {
             $accepted = [
                 'display_images', 'publicize_result', 'receive_statistics',
                 'allow_multiple_voting', 'paginate_question', 'allow_skip_question', 
-                'thank_you_text', 'closed_survey_text', 'footer_text'
+                'thank_you_text', 'closed_survey_text', 'footer_text', 'category'
             ];
 
             foreach($params['settings'] as $key => $value) {

@@ -19,9 +19,6 @@ $canDelete = hasPermission("questions", "add", $metadata);
                     <i class="fa fa-cog"></i> Configuration
                 </a>
             <?php } ?>
-            <a class="btn btn-sm btn-primary" title="Dashboard" href="<?= $baseURL ?>">
-                <i class="fa fa-home"></i>
-            </a>
         </div>
     </div>
     <div class="alert alert-success mb-0 mt-2">
@@ -35,7 +32,7 @@ $canDelete = hasPermission("questions", "add", $metadata);
                     <div>
                         <?php if(hasPermission("questions", "update", $metadata)) { ?>
                             <div class="text-center w-100">
-                                <button onclick="return add_question('<?= $slug; ?>')" class="btn btn-secondary">
+                                <button onclick="return add_question('<?= $slug; ?>')" class="btn btn-button btn-secondary">
                                     <i class="fa fa-plus"></i> Add Question
                                 </button>
                             </div>

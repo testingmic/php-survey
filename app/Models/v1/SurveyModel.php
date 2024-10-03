@@ -10,7 +10,7 @@ class SurveyModel extends Model {
     protected $primaryKey = 'id';
     protected $allowedFields = [
         'client_id', 'title', 'slug', 'description', 'end_date', 'is_published', 'button_text',
-        'date_created', 'created_by', 'settings', 'start_date', 'status', 'cover_art'
+        'date_created', 'created_by', 'settings', 'start_date', 'status', 'cover_art', 'category'
     ];
 
     public function create($data) {
