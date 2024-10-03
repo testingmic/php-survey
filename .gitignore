@@ -6,3 +6,4 @@ writable/session/*
 !writable/cache/.htaccess
 !writable/cache/index.html
 vendor/*
+.env
