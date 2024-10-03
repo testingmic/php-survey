@@ -24,8 +24,8 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://localhost/surveys/public/';
-    public $rootURL = 'http://localhost/surveys/';
+    public $baseURL;
+    public $rootURL;
 
     /**
      * --------------------------------------------------------------------------
@@ -469,4 +469,16 @@ class App extends BaseConfig
     public $AppEmail = "info@emmallextech.com";
 
     public $author = "Emmallex Technologies";
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        // get database credentials from .env file
+        $configEnv = getenv();
+
+        // set database credentials from .env file
+        $this->baseURL = ($configEnv['BASEURL'] ?? null) . "public";
+        $this->rootURL = ($configEnv['BASEURL'] ?? null);
+    }
 }
