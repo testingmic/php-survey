@@ -164,7 +164,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $sessionCookieName = 'surveyMonkey';
+    public $sessionCookieName = 'surveyBuilder';
 
     /**
      * --------------------------------------------------------------------------
@@ -465,7 +465,7 @@ class App extends BaseConfig
      */
     public $CSPEnabled = false;
 
-    public $AppName = "Survey Monkey";
+    public $AppName = "Survey Builder";
     public $AppEmail = "info@emmallextech.com";
 
     public $author = "Emmallex Technologies";

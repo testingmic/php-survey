@@ -168,7 +168,7 @@ class Crontab extends BaseController {
         $files_list = [
             WRITEPATH . 'session' => [
                'minutes' => 15,
-               'contains' => ['surveyMonkey']
+               'contains' => ['surveyBuilder']
             ],
             PUBLICPATH . 'uploads/tmp/avatar' => [
                 'minutes' => 10
