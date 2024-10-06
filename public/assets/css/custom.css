@@ -152,6 +152,10 @@ li {
     margin: 5px 0
 }
 
+.select2-results__options li {
+    margin: 0px;
+}
+
 a {
     color: #1c71d0;
     text-decoration: none
@@ -979,4 +983,8 @@ html[data-bs-theme="dark"] .select2-container--default .select2-selection--singl
 
 .select2-dropdown {
     z-index: 2076 !important;
+}
+
+.dataTables_filter {
+    float: right;
 }

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\AppController;
+use App\Models\v1\SurveyModel;
 
 class Pages extends AppController {
 
@@ -18,6 +19,9 @@ class Pages extends AppController {
         // check if the user is logged in
         $this->login_check();
 
+        // get the survey model
+        $dbObject = new SurveyModel();
+
         // page check
         $data['page'] = $page;
 
@@ -27,6 +31,14 @@ class Pages extends AppController {
             'billing' => 'Billing',
             'transaction' => 'Transactions'
         ];
+
+        // login history
+        if($path === 'login_history') {
+            $data['login_history'] = $dbObject->db->table('login_history')
+                                            ->where(['user_id' => $this->sessObject->_userId])
+                                            ->orderBy('lastlogin', 'DESC')
+                                            ->get()->getResultArray();
+        }
 
         // set the path to use
         $data['path'] = $path;

@@ -92,6 +92,16 @@ if ($('.selectpicker').length > 0) {
     });
 }
 
+if($('.datatable').length) {
+    $('.datatable').DataTable({
+        search: null,
+        lengthMenu: [
+            [25, 30, 50, 100],
+            [25, 30, 50, 100, "All"]
+        ]
+    });
+}
+
 $(`button[id="poll-button"]`).on("click", async function() {
 
     $(`div[class='select-notice']`).html(``);

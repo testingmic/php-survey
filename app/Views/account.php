@@ -96,6 +96,35 @@ $menu_pages = [
                                 </div>
                             </form>
                         <?php } ?>
+
+                        <?php if($path == 'login_history') { ?>
+                            <div class="table-responsive">
+                                <table class="table table-bordered datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>Device</th>
+                                            <th>IP Address</th>
+                                            <th>Login Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($login_history as $item) { ?>
+                                            <?php $device = parseUserAgent($item['user_agent']); ?>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <?= $device['device'] ?> | <?= $device['browser'] ?> | <?= $device['os'] ?> | 
+                                                        <?= $device['os_version']  ?>
+                                                    </div>
+                                                </td>
+                                                <td><?= $item['ip_address'] ?></td>
+                                                <td><?= $item['lastlogin'] ?></td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

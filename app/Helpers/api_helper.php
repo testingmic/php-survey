@@ -598,6 +598,77 @@ function selected_answer($questionId = null, $theAnswers = []) {
 }
 
 /**
+ * Parse the user agent
+ * 
+ * @param String    $userAgent
+ * 
+ * @return Array
+ */
+function parseUserAgent($userAgent = null) {
+    
+    $result = [
+        'browser' => 'Unknown',
+        'browser_version' => 'Unknown',
+        'os' => 'Unknown',
+        'os_version' => 'Unknown',
+        'device' => 'Unknown'
+    ];
+
+    if(empty($userAgent)) return;
+
+    // Browser and version
+    if (preg_match('/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i', $userAgent, $matches)) {
+        $result['browser'] = $matches[1];
+        if (strtolower($result['browser']) == 'trident') {
+            $result['browser'] = 'Internet Explorer';
+        }
+        $result['browser_version'] = $matches[2];
+    }
+
+    // Chrome specific check
+    if (preg_match('/Chrome\/(\d+)/', $userAgent, $matches)) {
+        $result['browser'] = 'Chrome';
+        $result['browser_version'] = $matches[1];
+    }
+
+    // OS and version
+    if (preg_match('/(mac os x|windows nt|linux) ?([^;)]+)?/i', $userAgent, $matches)) {
+        switch(strtolower($matches[1])) {
+            case 'mac os x':
+                $result['os'] = 'macOS';
+                $result['os_version'] = str_replace('_', '.', $matches[2]);
+                break;
+            case 'windows nt':
+                $result['os'] = 'Windows';
+                $windowsVersions = [
+                    '10.0' => '10',
+                    '6.3' => '8.1',
+                    '6.2' => '8',
+                    '6.1' => '7',
+                    '6.0' => 'Vista',
+                    '5.2' => 'XP',
+                    '5.1' => 'XP'
+                ];
+                $result['os_version'] = isset($windowsVersions[$matches[2]]) ? $windowsVersions[$matches[2]] : $matches[2];
+                break;
+            case 'linux':
+                $result['os'] = 'Linux';
+                $result['os_version'] = $matches[2] ?? 'Unknown';
+                break;
+        }
+    }
+
+    // Device type
+    if (preg_match('/(mobile|tablet|ipad|iphone|android)/i', $userAgent)) {
+        $result['device'] = 'Mobile';
+    } else {
+        $result['device'] = 'Desktop';
+    }
+
+    return $result;
+}
+
+/**
  * Format the question to be displayed
  * 
  * @param Array     $question
