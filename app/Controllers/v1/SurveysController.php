@@ -287,6 +287,16 @@ class SurveysController extends AccessBridge {
                 return ['code' => 203, 'result' => $params];
             }
 
+            if(!empty($params['start_date']) && !empty($params['end_date'])) {
+                if(strtotime($params['start_date']) > strtotime($params['end_date'])) {
+                    return ['code' => 404, 'result' => 'The start date must be less than the end date.'];
+                }
+
+                if(strtotime($params['end_date']) < time()) {
+                    return ['code' => 404, 'result' => 'The end date must be greater than the current date.'];
+                }
+            }
+
             if( !empty($params['slug']) ) {
                 
                 $params['slug'] = url_title($params['title'], '-', true);
@@ -350,6 +360,16 @@ class SurveysController extends AccessBridge {
 
             if (!is_array($params)) {
                 return ['code' => 203, 'result' => $params];
+            }
+
+            if(!empty($params['start_date']) && !empty($params['end_date'])) {
+                if(strtotime($params['start_date']) > strtotime($params['end_date'])) {
+                    return ['code' => 404, 'result' => 'The start date must be less than the end date.'];
+                }
+
+                if(strtotime($params['end_date']) < time()) {
+                    return ['code' => 404, 'result' => 'The end date must be greater than the current date.'];
+                }
             }
 
             if( !empty($params['slug']) ) {

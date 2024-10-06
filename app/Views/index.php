@@ -1,5 +1,9 @@
 <?php
 include_once 'headtags.php';
+
+// check if the user has the permission to update / delete the survey
+$canUpdate = hasPermission("surveys", "update", $metadata);
+$canDelete = hasPermission("surveys", "delete", $metadata);
 ?>
 <div class="container pt-4 mb-5">
     <div class="d-flex justify-content-between">
@@ -24,14 +28,20 @@ include_once 'headtags.php';
                 <div class="col-lg-4 col-md-6 mb-3">
                     <div class="card">
                         <div class="card-header">
-                            <?= $survey['title'] ?>
+                            <?php if ($canUpdate) { ?>
+                                <a href="<?= $baseURL ?>surveys/modify/<?= $survey['slug'] ?>/edit" title="Edit Survey">
+                                    <?= $survey['title'] ?>
+                                </a>
+                            <?php } else { ?>
+                                <?= $survey['title'] ?>
+                            <?php } ?>
                         </div>
                         <div class="card-body bg-white">
                             <div class="survey-image">
                                 <img class="m-0" width="100%" src="<?= $baseURL . $survey['cover_art'] ?>" alt="">
                             </div>
-                            <div>
-                                <?= character_limiter(strip_tags($survey['description']), 120) ?>
+                            <div class="survey-description">
+                                <?= character_limiter(strip_tags($survey['description']), 220) ?>
                             </div>
                             <div class="mt-2">
                                 <div class="d-flex justify-content-between">
@@ -60,7 +70,7 @@ include_once 'headtags.php';
                         <div class="card-footer w-100">
                             <div class="w-100 d-flex justify-content-between">
                                 <div>
-                                    <?php if (hasPermission("surveys", "update", $metadata)) { ?>
+                                    <?php if ($canUpdate) { ?>
                                         <a href="<?= $baseURL ?>surveys/modify/<?= $survey['slug'] ?>/edit" title="Edit Survey" class="btn btn-sm btn-outline-success">
                                             <i class="fa fa-edit"></i>
                                         </a>
@@ -76,12 +86,12 @@ include_once 'headtags.php';
                                     <a title="Analyze Survey Results" href="<?= $baseURL ?>embed/<?= $survey['slug'] ?>/results" class="btn btn-sm btn-outline-warning">
                                         <i class="fa fa-chart-bar"></i> Results
                                     </a>
-                                    <?php if (hasPermission("surveys", "update", $metadata)) { ?>
+                                    <?php if ($canUpdate) { ?>
                                         <a title="Export Survey as PDF" href="<?= $baseURL ?>embed/<?= $survey['slug'] ?>/export" class="btn btn-sm btn-outline-danger">
-                                            <i class="fa fa-file-download"></i>
+                                            &nbsp;&nbsp;<i class="fa fa-file-download"></i>&nbsp;&nbsp;
                                         </a>
                                     <?php } ?>
-                                    <?php if (hasPermission("surveys", "delete", $metadata)) { ?>
+                                    <?php if ($canDelete) { ?>
                                         <button hidden title="Delete Survey" class="btn btn-sm btn-outline-danger">
                                             <i class="fa fa-trash"></i>
                                         </button>

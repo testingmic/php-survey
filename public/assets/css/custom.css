@@ -413,12 +413,30 @@ time:hover {
     }
 }
 
+.survey-description {
+    padding-top: 5px;
+    min-height: 100px;
+    max-height: 100px;
+    overflow: hidden;
+}
+
+@media (min-width: 1400px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        max-width: 1450px;
+    }
+}
+
 .text-left {
     text-align: left;
 }
 
 .text-right {
     text-align: right;
+}
+
+.btn {
+    height: 35px;
+    line-height: 27px;
 }
 
 .btn-button {

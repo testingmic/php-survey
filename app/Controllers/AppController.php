@@ -109,12 +109,12 @@ class AppController extends ApiServices {
      * 
      * @return Bool
      */
-    public function login_check() {
+    public function login_check($page = "landing") {
         
         if(empty($this->sessObject->_clientId) && empty($this->sessObject->_userApiToken)) {
             try {
                 $data['isLoggedIn'] = false;
-                die( view("landing", $data) );
+                die( view($page, $data) );
             } catch(\Exception $e) {
                 die( view("not_found", [
                     'pagetitle' => 'Access Denied',

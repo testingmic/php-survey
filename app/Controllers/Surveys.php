@@ -16,7 +16,8 @@ class Surveys extends AppController {
      */
     public function modify($slug = null, $request = null) {
 
-        $this->login_check();
+        // check if the user is logged in
+        $this->login_check("login");
 
         $data = [];
         $data['isFound'] = false;
@@ -108,14 +109,26 @@ class Surveys extends AppController {
         $data['isResult'] = $isResult;
         $data['surveyHasEnded'] = (bool) (strtotime(date("Y-m-d H:i:s")) > strtotime($data['survey']['end_date']));
         
+        // check if the user is logged in
+        $isLoggedIn = $this->is_logged_in();
+
+        // if the request is to export the survey
         if( $isExport ) {
+
+            // check if the user is logged in
+            $this->login_check("login");
+
+            // if the client id is not the same as the user's client id
+            if($data['survey']['client_id'] !== $this->_userData['client_id']) {
+                return $this->show_display('not_found');
+            }
+
+            // export the survey
             return $this->export_survey($data);
         }
 
         // if the request is not equal to results
         if(!$isResult) {
-
-            $isLoggedIn = $this->is_logged_in();
 
             // force refresh
             if( !empty($this->sessObject->forceRefresh) ) {
@@ -203,19 +216,21 @@ class Surveys extends AppController {
         }
 
         $quest = [];
-        foreach($survey['questions'] as $question) {
-            $quest[$question['id']] = [
-                'title' => $question['title'],
-                'type' => $question['answer_type'],
-                'options' => regroup_keys(json_decode($question['options'], true))
-            ];
-            $question_id = (int) $question['id'];
-            $quest[$question['id']]['answers'] = array_filter($survey['votes'], function($votes) use($question_id) {
-                if((int) $votes['question_id'] == $question_id) {
-                    return true;
-                }
-                return false;
-            });
+        if(!empty($survey['questions']) && is_array($survey['questions'])) {
+            foreach($survey['questions'] as $question) {
+                $quest[$question['id']] = [
+                    'title' => $question['title'],
+                    'type' => $question['answer_type'],
+                    'options' => regroup_keys(json_decode($question['options'], true))
+                ];
+                $question_id = (int) $question['id'];
+                $quest[$question['id']]['answers'] = array_filter($survey['votes'], function($votes) use($question_id) {
+                    if((int) $votes['question_id'] == $question_id) {
+                        return true;
+                    }
+                    return false;
+                });
+            }
         }
 
         function combine_array($array_keys = [], $array_values = [], $total) {
@@ -249,9 +264,6 @@ class Surveys extends AppController {
                 $item['skipped'] = $item['counts']['skipped'];
                 unset($item['counts']['skipped']);
             }
-
-            // print_r($item['counts']);
-            // continue;
 
             // get the max key
             $max_keys = !empty($item['counts']) ? array_keys($item['counts'], max($item['counts'])) : [];
@@ -308,10 +320,24 @@ class Surveys extends AppController {
         $result = $data['data']['result'];
         $votes_count = $result['summary']['votes_count'];
         $filename = "{$params['survey']['id']} - Survey Results.pdf";
+
+        $survey = $params['survey'];
         
         $html .= "
         <div style='' align='center'>
-            <h2>{$params['survey']['title']}</h2>
+            <h2>{$survey['title']}</h2>
+            <div style='margin-bottom:10px; border-bottom:solid 3px #000; padding-bottom:10px;'>
+                <div style='margin-bottom:5px;'>
+                    <strong>Start Date: </strong> ".date("jS F, Y", strtotime($survey['start_date']))." &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+                    <strong>End Date: </strong> ".date("jS F, Y", strtotime($survey['end_date']))."
+                </div>
+                <div style='margin-bottom:5px;'>
+                    <strong>Category: </strong> {$this->surveyCategories[$survey['category']]}
+                </div>
+                <div style='margin-bottom:0px;'>
+                    <strong>Unique Votes: </strong> {$survey['submitted_answers']}
+                </div>
+            </div>
         </div>";
         foreach($result['questions'] as $question) {
             $html .= "
