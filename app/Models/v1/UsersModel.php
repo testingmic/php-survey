@@ -9,8 +9,8 @@ class UsersModel extends Model {
     protected $primaryKey = 'id';
     protected $allowedFields = [
         'name', 'school_id', 'username', 'email', 'recovercontact',
-        'index_number', 'password', 'group_id', 'programme_id', 
-        'class_id', 'status', 'created_by', 'is_bulk_record'
+        'index_number', 'password', 'group_id', 'programme_id', 'phone', 
+        'class_id', 'status', 'created_by', 'is_bulk_record', 'address'
     ];
 
     public function create($data) {

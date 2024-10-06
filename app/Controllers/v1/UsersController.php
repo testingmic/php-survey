@@ -210,5 +210,102 @@ class UsersController extends AccessBridge {
         
     }
 
+    /**
+     * Update the user information
+     * 
+     * @param Array $params
+     * 
+     * @return Array
+     */
+    public function update($params = []) {
+        
+        try {
+
+            // check if the client id is different
+            if($params['client_id'] !== $params['_userData']['client_id']) {
+                return 'Client id does not match';
+            }
+
+            // check if the email is already in use
+            if($params['email'] !== $params['_userData']['email']) {
+                
+                // check if the email is already in use
+                $checkEmail = $this->db_model->db->table('users')->where(['email' => $params['email']])->limit(1)->get()->getRowArray();
+
+                // if the email is already in use
+                if(!empty($checkEmail)) {
+                    return 'Email already exists';
+                }
+
+                // update the email and username
+                $this->db_model->db->table('users')->update(['email' => $params['email'], 'username' => $params['email']], ['user_id' => $params['id']]);
+            }
+
+            // update the name
+            $this->db_model->db->table('users')->update([
+                'name' => $params['name'],
+            ], ['id' => $params['user_id'], 'client_id' => $params['client_id']]);
+
+            // update the client data
+            $this->db_model->db->table('clients')->update([
+                'name' => $params['company'],
+                'email' => $params['email'],
+                'address' => $params['address'],
+                'phone' => $params['phone']
+            ], ['id' => $params['client_id']]);
+
+            return ['code' => 200, 'result' => 'User updated successfully'];
+
+        } catch(\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * Change the user password
+     * 
+     * @param Array $params
+     * 
+     * @return Array
+     */
+    public function changepassword($params = []) {
+
+        try {
+
+            // get the user data
+            $user = $params['_userData'];
+
+            // check if the password and confirm password is the same
+            if($params['password'] !== $params['password_confirm']) {
+                return 'Password and Confirm Password do not match';
+            }
+
+            // check if the password is strong enough
+            if(!password_strength($params['password'])) {
+                return 'Sorry! The password is not strong enough.';
+            }
+
+            // if the password is correct
+            if(!password_verify($params['current_password'], $user['password'])) {
+                return 'Password is incorrect';
+            }
+
+            // update the password
+            $this->db_model->db->table('users')->update(['password' => password_hash($params['password'], PASSWORD_DEFAULT)], ['id' => $user['id']]);
+
+            return [
+                'code' => 200, 
+                'result' => 'Password updated successfully',
+                'additional' => [
+                    'clear' => true
+                ]
+            ];
+
+        } catch(\Exception $e) {
+            return $e->getMessage();
+        }
+
+    }
+
 }
 ?>

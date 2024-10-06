@@ -146,6 +146,11 @@ class AuthController extends AccessBridge {
                 return 'Sorry! The username or email already exists.';
             }
 
+            // check if the password is strong enough
+            if(!password_strength($params['password'])) {
+                return 'Sorry! The password is not strong enough.';
+            }
+
             // set the password
             $params['password'] = password_hash($params['password'], PASSWORD_DEFAULT);
 
@@ -386,9 +391,6 @@ class AuthController extends AccessBridge {
 		if($NotExpired) {
             
             try {
-                
-                // update the last login
-                $this->auth_model->db->table('users')->update(['last_login' => date('Y-m-d H:i:s')], ['id' => $data[0]['user_id']], 1);
 
                 // return the user data
                 return $this->user_data($data[0]['user_id'], $api_version);

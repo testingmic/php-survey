@@ -393,6 +393,36 @@ function is_contact($rule, $string, $variable_name = 'the variable') {
 }
 
 /**
+ * Password Strength Checker
+ * 
+ * Check if the password is at least:
+ *  
+ * 8 characters long, and contains
+ * 1 uppercase, 
+ * 1 lowercase, 
+ * 1 number and 
+ * 1 special character.
+ * 
+ * @param String $password
+ * 
+ * @return Bool
+ */
+function password_strength($password) {
+    
+    // Validate password strength
+    $uppercase = preg_match('@[A-Z]@', $password);
+    $lowercase = preg_match('@[a-z]@', $password);
+    $number    = preg_match('@[0-9]@', $password);
+    $specialChars = preg_match('@[^\w]@', $password);
+
+    if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/**
  * Clean the text especially for html_entity_encoded text
  * 
  * revert it back to its original format and the strip tags

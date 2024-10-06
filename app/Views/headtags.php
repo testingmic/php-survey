@@ -76,7 +76,7 @@ $Route = $SPLIT[0];
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item dropdown ms-auto">
                                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                            <?= !empty(get_meta($metadata, 'fullname')) ? get_meta($metadata, 'fullname') : $sessObj->_userName ?>
+                                            <?= !empty($user['name']) ? $user['name'] : $user['email'] ?>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end">
                                             <a href="<?= $baseURL ?>dashboard" class="dropdown-item">

@@ -45,7 +45,7 @@ include_once 'headtags.php';
                     <a href="<?= $baseURL ?>surveys/modify/<?= $survey['slug'] ?>/edit" class="btn btn-sm btn-outline-success">
                         <i class="fa fa-edit"></i> Edit Survey
                     </a>
-                    <a href="<?= $baseURL ?>embed/<?= $survey['slug'] ?>/export" class="btn btn-sm btn-outline-danger">
+                    <a href="<?= $baseURL ?>embed/<?= $survey['slug'] ?>/export" target="_blank" class="btn btn-sm btn-outline-danger">
                         <i class="fa fa-file-pdf"></i> Export Results
                     </a>
                 </div>

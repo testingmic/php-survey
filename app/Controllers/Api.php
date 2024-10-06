@@ -133,27 +133,17 @@ class Api extends BaseController {
 
         // set the array to bypass
         $end_url_primary_key = $this->apiConfig->putAppend;
-        
-        // $outer_url check
-        if(!empty($this->primaryKey) && !preg_match("/^[0-9,]+$/", $this->primaryKey) && !in_array($this->primaryKey, $end_url_primary_key)) {
-            return $this->respond($this->requestOutput(400, $this->outputMessage(400)), 400);
-        }
-
-        // if the request is post
-        if( !empty($this->primaryKey) && in_array($this->req_method, ["POST"]) && !in_array($this->primaryKey, $end_url_primary_key)) {
-            return $this->respond($this->requestOutput(405, $this->outputMessage(405)), 405);
-        }
 
         // get the authorization header parsed token
         $this->AuthorizationToken = $this->request->header('Authorization');
 
         // set the method to use
-        if(in_array($this->primaryKey, $end_url_primary_key)) {
+        if(!$version_passed) {
             $this->class_method = $primary_key;
         } else {
             $this->class_method = (!empty($last_url) ? $second_url : ($this->apiConfig->allowed_methods[$this->req_method] ?? "index"));
         }
-        
+
         // set the default parameters
         $this->req_params = $t_params;
 
@@ -241,7 +231,9 @@ class Api extends BaseController {
             
             // set the code to return 
             $code = empty($this->inner_url) ? 200 : 404;
-
+            print $this->class_method;exit;
+            print_r($db_req_params[$this->request_endpoint][$this->req_method]);
+            exit;
             // set the response code
             $this->response_code = $code;
 

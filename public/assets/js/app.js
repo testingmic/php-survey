@@ -2,13 +2,13 @@ var surveyResults, userFingerprint,
     formoverlay = $(`div[class="formoverlay"]`),
     selectedQuestion;
     
-var Notify = (message, theme = "danger", icon = 'fa-bell-o') => {
+var Notify = (message, theme = "danger") => {
     toastr.options.positionClass = 'toast-top-right';
     toastr.options.extendedTimeOut = 0;
-    toastr.options.timeOut = 4000;
+    toastr.options.timeOut = 6000;
     toastr.options.closeButton = true;
-    toastr.options.iconClass = icon + ' toast-' + theme;
-    toastr['custom'](message);
+    toastr.options.iconClass = ' toast-' + theme;
+    toastr['custom'](`<i class="fa fa-bell-o"></i> ${message}`);
 }
 
 var responseCode = (code) => {

@@ -2078,6 +2078,10 @@ class BaseBuilder
 
             $result = $this->db->query($sql, $this->binds, false);
 
+            // print $sql . "\n";
+            // print_r($this->binds);
+            // print "\n\n";
+
             if ($result !== false) {
                 // Clear our binds so we don't eat up memory
                 $this->binds = [];
