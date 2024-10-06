@@ -65,16 +65,30 @@ class Crontab extends BaseController {
         $config['sql'] = "sql";
 
         if( !isset($config[$request]) ) {
-            return "Unknown reqest: {$request} {$action}.\n";
+            return "Unknown request: {$request} {$action}.\n";
         }
 
-        $method = $config[$request][$action] ?? $config[$request];
-
-        if(!method_exists($this, $method)) {
-            return "Action accepted however, the Method {$method} has not yet been created.\n";
+        $method = null;
+        if(isset($config[$request])) {
+            if(!empty($action) && isset($config[$request][$action])) {
+                $method = $config[$request][$action];
+            } else {
+                $method = $config[$request];
+            }
         }
 
-        return $this->$method($info, $action);
+        if(is_array($method)) {
+
+            if(empty($action)) {
+                return "Action accepted however, the Method was not found.\n";
+            }
+
+            if(!method_exists($this, $action)) {
+                return "Action accepted however, the Method {$method} has not yet been created.\n";
+            }
+        }
+
+        return $this->{$method}($info, $action);
     }
 
     private function write_file($ifile, $content, $note) {
@@ -116,6 +130,7 @@ class Crontab extends BaseController {
     private function selecttable($rule = null, $table = null) {
 
         try {
+            
             if( empty($rule) ) {
                 $rule = 1;
             }

@@ -23,7 +23,7 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
-        'throttle'      => \App\Filters\Throttle::class
+        // 'throttle'      => \App\Filters\Throttle::class
     ];
 
     /**
@@ -34,7 +34,7 @@ class Filters extends BaseConfig
      */
     public $globals = [
         'before' => [
-            'throttle',
+            // 'throttle',
             // 'csrf',
             // 'invalidchars',
         ],
@@ -59,10 +59,10 @@ class Filters extends BaseConfig
      * @var array
      */
     public $methods = [
-        'get' => ['throttle'],
-        'post' => ['throttle'],
-        'put' => ['throttle'],
-        'delete' => ['throttle']
+        // 'get' => ['throttle'],
+        // 'post' => ['throttle'],
+        // 'put' => ['throttle'],
+        // 'delete' => ['throttle']
     ];
 
     /**

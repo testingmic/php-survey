@@ -9,14 +9,26 @@ composer install
 composer update
 ```
 
-Add this to your Routes
-```
-$routes->cli("/surveys", "Surveys::setup");
+Update the database credentials in app/config/Database.php
+
+Run this bash command to create all the required tables and insert the default data.
+```bash
+php index.php root system setup
 ```
 
-Run this bash command to create all the required tables.
+## Default login
+The default login is 'admin@localhost.com' with a password of '12345678'. You can update login credentials from the Account page.
+
+Load from the users table
 ```bash
-php index.php surveys setup
+php index.php root selecttable users
+php index.php root selecttable users "id = 1"
+```
+
+Load from the users table
+```bash
+php index.php root selecttable surveys
+php index.php root selecttable surveys "slug LIKE '%dolor%'""
 ```
 
 ## Troubleshooting
