@@ -447,6 +447,20 @@ time:hover {
     background-color: #7cd119db;
 }
 
+.side-menu.active {
+    color: #fff;
+    background-color: #03a9f4;
+}
+
+.side-menu.active a {
+    color: #fff;
+}
+
+.side-menu.disabled, .side-menu.disabled a {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 #toast-container>div {
     padding: 15px 15px 15px 15px;
 }

@@ -12,7 +12,7 @@ $menu_pages = [
 <div class="container main-content pt-4 mb-4">
     <div class="header">
         <?php foreach($pages as $page => $name) { ?>
-            <span <?= $page == 'account' ? 'class="active"' : '' ?>>
+            <span <?= $page == $path ? 'class="active"' : '' ?>>
                 <a href="<?= $baseURL; ?><?= $page ?>"><?= $name ?></a>
             </span>
         <?php } ?>
@@ -27,8 +27,10 @@ $menu_pages = [
                     </div>
                     <div class="card-body">
                         <?php foreach($menu_pages as $page => $name) { ?>
-                            <div class="side-menu">
-                                <a href="<?= $baseURL ?>account/<?= $page ?>"><?= $name ?></a>
+                            <div class="side-menu <?= $page == $path ? 'active disabled' : '' ?>">
+                                <a class="<?= $page == $path ? 'active disabled' : '' ?>" href="<?= $baseURL ?>account/<?= $page ?>">
+                                    <?= $name ?>
+                                </a>
                             </div>
                         <?php } ?>
                     </div>

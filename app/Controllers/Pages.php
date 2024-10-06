@@ -24,8 +24,8 @@ class Pages extends AppController {
         // pages
         $data['pages'] = [
             'account' => 'Account Summary',
-            'billing' => 'Billing Details',
-            'transaction' => 'Transaction History'
+            'billing' => 'Billing',
+            'transaction' => 'Transactions'
         ];
 
         // set the path to use
