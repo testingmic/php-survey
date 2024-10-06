@@ -30,11 +30,11 @@ var populate_statistics = function(results = "default", question_id) {
     let theSurvey = results == "default" ? surveyResults : results;
     let questions = theSurvey.questions;
 
-    if(questions !== undefined) {
+    if(typeof questions !== 'undefined') {
         let html_string = "";
         let e = questions[question_id];
 
-        if(e == undefined) {
+        if(typeof e == 'undefined') {
             Notify("Sorry! The question id does not exist");
             return false;
         }
@@ -143,11 +143,11 @@ var save_question = () => {
             Notify(response.data.result, responseCode(response.code));
             
             if(response.code == 200) {
-                if(response.data.additional !== undefined) {
-                    if(response.data.additional.clear !== undefined) {
+                if(typeof response.data.additional !== 'undefined') {
+                    if(typeof response.data.additional.clear !== 'undefined') {
                         $(`form[class="appForm"] *`).val(``);
                     }
-                    if(response.data.additional.href !== undefined) {
+                    if(typeof response.data.additional.href !== 'undefined') {
                         setTimeout(() => {
                             window.location.href = `${baseURL}${response.data.additional.href}`;
                         }, 2000);
@@ -245,12 +245,12 @@ $(`form[class="appForm"]`).on("submit", function(evt) {
     $.post(`${action}`, form).then((response) => {
         Notify(response.data.result, responseCode(response.code));
         if(response.code == 200) {
-            if(response.data.additional !== undefined) {
-                if(response.data.additional.clear !== undefined) {
+            if(typeof response.data.additional !== 'undefined') {
+                if(typeof response.data.additional.clear !== 'undefined') {
                     $(`form[class="appForm"] *`).val(``);
                     $(`trix-editor`).html(``);
                 }
-                if(response.data.additional.href !== undefined) {
+                if(typeof response.data.additional.href !== 'undefined') {
                     setTimeout(() => {
                         window.location.href = `${baseURL}${response.data.additional.href}`;
                     }, 2000);
@@ -279,12 +279,18 @@ if($(`input[name="surveyAnalytic"]`).length) {
         if(response.code == 200) {
             surveyResults = response.data.result;
             let questions = response.data.result.questions;
-            if(questions !== undefined) {
+            if(typeof questions !== 'undefined') {
+                let ct = 0;
                 $.each(questions, function(i, e) {
-                    $(`select[name="question_id"]`).append(`<option value="${i}">${e.title}</option>`);
+                    ct++;
+                    $(`select[name="question_id"]`).append(`<option value="${i}">${ct}. ${e.title}</option>`);
                 });
-                activeQuestion = surveyResults.first_question;
-                populate_statistics(surveyResults, surveyResults.first_question);
+                if(!Object.keys(questions).length) {
+                    $(`div[id="answer_question"]`).html(`<div class="alert alert-success mb-0">No questions found in this survey.</div>`);
+                } else {
+                    activeQuestion = surveyResults.first_question;
+                    populate_statistics(surveyResults, activeQuestion);
+                }
             }
         }
     }).fail((err) => {

@@ -54,6 +54,13 @@ var guid = function() {
     return guid;
 };
 
+if ($('.selectpicker').length > 0) {
+    $('.selectpicker').each((index, el) => {
+        let select = $(el);
+        select.select2();
+    });
+}
+
 $(`button[id="poll-button"]`).on("click", async function() {
 
     $(`div[class='select-notice']`).html(``);

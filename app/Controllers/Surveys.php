@@ -250,8 +250,11 @@ class Surveys extends AppController {
                 unset($item['counts']['skipped']);
             }
 
+            // print_r($item['counts']);
+            // continue;
+
             // get the max key
-            $max_keys = array_keys($item['counts'], max($item['counts']));
+            $max_keys = !empty($item['counts']) ? array_keys($item['counts'], max($item['counts'])) : [];
 
             foreach($max_keys as $m_key) {
                 if(isset($item['options'][$m_key])) {

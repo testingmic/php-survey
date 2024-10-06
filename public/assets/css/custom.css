@@ -869,3 +869,38 @@ trix-editor.short-height {
 .userprofile ul li .dropdown-menu a {
     color: #000;
 }
+
+.select2-container--default .select2-selection--single {
+    height: 40px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 41px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 36px !important;
+}
+
+.select2-container--default.select2-container--disabled .select2-selection--single {
+    background-color: #f6f7fb;
+    cursor: default;
+    border: solid 1px #dee2e8;
+}
+
+html[data-bs-theme="dark"] .select2-container--default .select2-selection--single,
+html[data-bs-theme="dark"] .select2-container--default.select2-container--disabled .select2-selection--single {
+    background-color: #404954;
+}
+
+html[data-bs-theme="dark"] .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #fff;
+}
+
+.select2-container .select2-selection--multiple .select2-selection__choice {
+    color: #000 !important;
+}
+
+.select2-dropdown {
+    z-index: 2076 !important;
+}

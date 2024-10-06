@@ -57,7 +57,7 @@ $atLeastOne = (bool) (hasPermission("surveys", "add", $metadata) || hasPermissio
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="">Category <span class="required">*</span></label>
-                                <select name="category" id="surveyCategory" class="form-control">
+                                <select name="category" id="surveyCategory" class="selectpicker form-control">
                                     <?php foreach($surveyCategories as $key => $value) { ?>
                                         <option value="<?= $key ?>" <?= !empty($survey) && $survey['category'] == $key ? "selected" : null; ?>><?= $value ?></option>
                                     <?php } ?>
@@ -92,7 +92,7 @@ $atLeastOne = (bool) (hasPermission("surveys", "add", $metadata) || hasPermissio
                             </div>
                             <div class="col-md-3 col-sm-6 mb-3">
                                 <label for="">Is Published</label>
-                                <select class="form-control" name="is_published" id="is_published">
+                                <select class="selectpicker form-control" name="is_published" id="is_published">
                                     <option <?= !empty($survey) && empty($survey['is_published']) ? "selected" : null; ?> value="0">No</option>
                                     <option <?= !empty($survey) && !empty($survey['is_published']) ? "selected" : null; ?> value="1">Yes</option>
                                 </select>
@@ -100,7 +100,7 @@ $atLeastOne = (bool) (hasPermission("surveys", "add", $metadata) || hasPermissio
                             <?php foreach($settings as $item) { ?>
                                 <div class="col-md-3 col-sm-6 mb-3">
                                     <label for=""><?= ucwords(str_ireplace("_", " ", $item)); ?></label>
-                                    <select name="settings[<?= $item ?>]" id="settings[<?= $item ?>]" class="form-control">
+                                    <select name="settings[<?= $item ?>]" id="settings[<?= $item ?>]" class="selectpicker form-control">
                                         <option <?= !empty($survey) && empty($survey['settings'][$item]) ? "selected" : null; ?> value="0">No</option>
                                         <option <?= !empty($survey) && !empty($survey['settings'][$item]) ? "selected" : null; ?> value="1">Yes</option>
                                     </select>

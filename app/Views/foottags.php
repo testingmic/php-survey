@@ -10,6 +10,7 @@
     <script src="<?= $baseURL ?>assets/js/jquery.js"></script>
     <script src="<?= $baseURL ?>assets/js/sweetalert.js"></script>
     <script src="<?= $baseURL ?>assets/js/toastr.js"></script>
+    <script src="<?= $baseURL ?>assets/js/select2.js"></script>
     <!-- <script src="<?= $baseURL ?>assets/js/fingerprint.js"></script> -->
     <script src="<?= $baseURL ?>assets/js/bootstrap.js"></script>
     <script src="<?= $baseURL ?>assets/js/app.js?v=1.0.41"></script>

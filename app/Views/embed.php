@@ -39,8 +39,11 @@ include_once 'headtags.php';
             <div class="row">
                 <div class="col-md-9">
                     <h5>Survey Report</h5>
-                    <a href="<?= $baseURL ?>" class="btn btn-sm btn-outline-primary">
-                        <i class="fa fa-arrow-alt-circle-left"></i> Go Back
+                    <a href="<?= $baseURL ?>dashboard" class="btn btn-sm btn-outline-primary">
+                        <i class="fa fa-home"></i> Dashboard
+                    </a>
+                    <a href="<?= $baseURL ?>surveys/modify/<?= $survey['slug'] ?>/edit" class="btn btn-sm btn-outline-success">
+                        <i class="fa fa-edit"></i> Edit Survey
                     </a>
                     <a href="<?= $baseURL ?>embed/<?= $survey['slug'] ?>/export" class="btn btn-sm btn-outline-danger">
                         <i class="fa fa-file-pdf"></i> Export Results

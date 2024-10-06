@@ -29,6 +29,7 @@ $Route = $SPLIT[0];
     <link rel="stylesheet" href="<?= $baseURL ?>assets/css/fontawesome.css">
     <link rel="stylesheet" href="<?= $baseURL ?>assets/css/toastr.css">
     <link rel="stylesheet" href="<?= $baseURL ?>assets/css/trix.css">
+    <link rel="stylesheet" href="<?= $baseURL ?>assets/css/select2.css">
     <link rel="stylesheet" href="<?= $baseURL ?>assets/css/custom.css?v=1.0.5">
     <meta name="description" content="The board of the Ghana Twitter Awards has finally released the list of nominees for this year’s edition. The Ghana Twitter Awards, also known as the GTAs, is an...">
     
