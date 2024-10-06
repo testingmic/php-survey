@@ -34,7 +34,7 @@ php index.php root selecttable surveys "slug LIKE '%dolor%'""
 ## Troubleshooting
 Be sure that your writable/ directory is writable by your web server.
 
-# MacOS: Make the writable/cache directory writable by your web server user
+### MacOS: Make the writable/cache directory writable by your web server user
 ```bash
 sudo dscl . -append /Groups/_www GroupMembership username
 sudo dscl . -append /Groups/_www GroupMembership daemon
@@ -45,7 +45,7 @@ sudo chmod g+s writable/cache
 
 Change the 'username' to your username.
 
-# Linux: Make the writable/cache directory writable by your web server user
+### Linux: Make the writable/cache directory writable by your web server user
 ```bash
 sudo chown -R www-data:www-data writable/cache
 sudo chmod -R 775 writable/cache
