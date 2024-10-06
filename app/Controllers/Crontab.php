@@ -98,6 +98,17 @@ class Crontab extends BaseController {
         return "The system was successfully {$note} at ". date("Y-m-d h:i:sa")."\n";
     }
 
+    private function setup() {
+        
+        try {
+
+            $db = db_connect();
+
+        } catch(\CodeIgniter\Database\Exceptions\DatabaseException $e) {
+            print $e->getMessage();
+        }
+    }
+
     private function shutdown($info = null) {
         $tfile = APPPATH . "Files/System.json";
 
