@@ -13,7 +13,8 @@ class Pages extends AppController {
      * 
      * @return String
      */
-    public function page($page) {
+    public function page($page, $path = 'account') {
+        
         // check if the user is logged in
         $this->login_check();
 
@@ -26,6 +27,10 @@ class Pages extends AppController {
             'billing' => 'Billing Details',
             'transaction' => 'Transaction History'
         ];
+
+        // set the path to use
+        $data['path'] = $path;
+
         // get the user data
         return $this->show_display($page, $data);
     }

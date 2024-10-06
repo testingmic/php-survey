@@ -11,7 +11,7 @@ include_once 'headtags.php';
     </div>
     <div class="content">
         <div class="content-title">Billing Profile</div>
-        <div class="alert alert-danger pl-2 pt-1 pb-1">
+        <div class="alert alert-danger">
             You have a BASIC (free) plan. Upgrade now to get unlimited questions, downloadable reports, and more.
         </div>
     </div>

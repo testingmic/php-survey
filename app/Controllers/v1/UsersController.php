@@ -166,7 +166,7 @@ class UsersController extends AccessBridge {
             $where_clause = !empty($unique_id) ? ['a.id' => $unique_id] : $params;
 
             $data = $this->db_model->db->table('users a')
-                                    ->select('a.*, s.name, s.fee_payment, s.logo,
+                                    ->select('a.*, s.name as client_name, s.fee_payment, s.logo,
                                         s.email, s.address, s.phone, s.settings, g.name AS group_name
                                     ')
                                     ->where($where_clause)
@@ -188,7 +188,12 @@ class UsersController extends AccessBridge {
                 // where clause
                 $where_clause = ['user_id' => $data['id']];
 
-                // set the school id
+                // get the client data
+                $data['client'] = $this->db_model->db->table('clients')
+                                        ->where(['id' => $data['client_id']])
+                                        ->limit(1)->get()->getRowArray();
+
+                // get the user metadata
                 $data['metadata'] = $this->db_model->db->table('users_metadata')
                                         ->where($where_clause)
                                         ->limit(200)->get()->getResultArray();

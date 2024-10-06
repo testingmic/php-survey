@@ -172,11 +172,6 @@ class AuthController extends AccessBridge {
             // if the insert was successful
             if(!empty($insertId)) {
 
-                // insert the fullname
-                $this->auth_model
-                        ->db->query("INSERT INTO users_metadata (user_id, client_id, name, value)
-                            VALUES ({$insertId}, {$params['client_id']}, 'fullname', '{$params['name']}')");
-
                 // get the user data
                 $permissions = $this->auth_model->db->table('users_groups')->where('id', $params['group_id'])->get()->getRow();
                 if(!empty($permissions)) {

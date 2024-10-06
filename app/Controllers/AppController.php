@@ -73,11 +73,12 @@ class AppController extends ApiServices {
 
             // set the user data
             $data['isLoggedIn'] = $this->is_logged_in();
-            $data['_userData'] = $this->_userData;
-            
+            $data['user'] = $this->_userData;
+        
             // confirm if the user is logged in
-            if( !empty($data['_userData']) ) {
-                $data['metadata'] = $data['_userData']['metadata'] ?? [];
+            if( !empty($data['user']) ) {
+                unset($data['user']['password']);
+                $data['metadata'] = $data['user']['metadata'] ?? [];
             }
             
             // show the page

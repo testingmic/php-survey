@@ -420,6 +420,33 @@ time:hover {
     overflow: hidden;
 }
 
+.side-menu {
+    padding-left: 10px;
+    height: 40px;
+    cursor: pointer;
+    line-height: 40px;
+    border-bottom: 1px solid #ccc;
+}
+
+.side-menu:last-child {
+    border-bottom: none;
+}
+
+.side-menu a {
+    display: block;
+    text-decoration: none;
+    width: 100% !important;
+}
+
+.side-menu:hover a {
+    color: #fff;
+}
+
+.side-menu:hover {
+    color: #fff;
+    background-color: #7cd119db;
+}
+
 @media (min-width: 1400px) {
     .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
         max-width: 1450px;

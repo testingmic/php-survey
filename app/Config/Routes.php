@@ -38,6 +38,7 @@ $routes->get('/dashboard', 'Home::dashboard');
 $routes->get('/login', 'Pages::login');
 $routes->get('/signup', 'Pages::signup');
 $routes->get('/account', 'Pages::page/account');
+$routes->get('/account/(:any)', 'Pages::page/account/$1');
 $routes->get('/support', 'Pages::page/support');
 $routes->get('/billing', 'Pages::page/billing');
 $routes->get('/transaction', 'Pages::page/transaction');

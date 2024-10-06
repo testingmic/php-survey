@@ -331,12 +331,14 @@ class Surveys extends AppController {
                     <strong>Start Date: </strong> ".date("jS F, Y", strtotime($survey['start_date']))." &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
                     <strong>End Date: </strong> ".date("jS F, Y", strtotime($survey['end_date']))."
                 </div>
-                <div style='margin-bottom:5px;'>
-                    <strong>Category: </strong> {$this->surveyCategories[$survey['category']]}
-                </div>
-                <div style='margin-bottom:0px;'>
-                    <strong>Unique Votes: </strong> {$survey['submitted_answers']}
-                </div>
+                ".(!empty($survey['category']) ? "
+                    <div style='margin-bottom:5px;'>
+                        <strong>Category: </strong> {$this->surveyCategories[$survey['category']]}
+                    </div>
+                    <div style='margin-bottom:0px;'>
+                        <strong>Unique Votes: </strong> {$survey['submitted_answers']}
+                    </div>" : null
+                )."
             </div>
         </div>";
         foreach($result['questions'] as $question) {

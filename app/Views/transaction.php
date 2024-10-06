@@ -11,10 +11,8 @@ include_once 'headtags.php';
     </div>
     <div class="content">
         <div class="content-title">Purchase Activity</div>
-        <div class="card">
-            <div class="card-body">
-                You don't have any invoices yet.
-            </div>
+        <div class="alert alert-success">
+            You don't have any invoices yet.
         </div>
     </div>
 </div>
