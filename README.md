@@ -1,4 +1,4 @@
-# Codeigniter Survey
+# PHP Survey Builder
 
 php-surveys is a PHP web application that lets you create and collect survey responses. The results can be viewed on charts and exported to PDF. The survey data is stored within a mysql database by default, and can also be stored in a sqlite3 or postgresql database. Edit app/config/Database.php to database of your choice.
 
