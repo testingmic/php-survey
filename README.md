@@ -2,7 +2,7 @@
 
 php-surveys is a PHP web application that lets you create and collect survey responses. The results can be viewed on charts and exported to PDF. The survey data is stored within a mysql database by default, and can also be stored in a sqlite3 or postgresql database. Edit app/config/Database.php to database of your choice.
 
-<img width="1307" alt="Screenshot 2024-10-06 at 12 40 17 PM" src="https://github.com/user-attachments/assets/65bafd91-e8df-476c-82de-1ede878107d3">
+<img width="1265" alt="Screenshot 2024-10-06 at 12 41 49 PM" src="https://github.com/user-attachments/assets/5a103eab-7e1c-4f3b-90ae-0b724861dd93">
 
 ## Installation
 Require the package using composer.
