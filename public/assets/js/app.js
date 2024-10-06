@@ -42,16 +42,47 @@ var refresh_handler = () => {
     });
 }
 
-var guid = function() {
-    var nav = window.navigator;
-    var screen = window.screen;
-    var guid = "";
-    guid += nav.userAgent.replace(/\D+/g, '');
-    guid += screen.height || '';
-    guid += screen.width || '';
-    guid += screen.pixelDepth || '';
-
-    return guid;
+const generateDeviceFingerprint = () => {
+    const components = [
+      navigator.userAgent,
+      navigator.language,
+      navigator.hardwareConcurrency,
+      navigator.deviceMemory,
+      screen.colorDepth,
+      screen.pixelDepth,
+      screen.width,
+      screen.height,
+      window.devicePixelRatio,
+      new Date().getTimezoneOffset(),
+      !!window.sessionStorage,
+      !!window.localStorage,
+      !!window.indexedDB,
+      typeof window.openDatabase,
+      navigator.cpuClass,
+      navigator.platform,
+      navigator.doNotTrack,
+      navigator.plugins.length,
+      navigator.mimeTypes.length,
+      !!window.WebGLRenderingContext
+    ];
+  
+    // WebGL information
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (gl) {
+      components.push(gl.getParameter(gl.VENDOR));
+      components.push(gl.getParameter(gl.RENDERER));
+    }
+  
+    // Installed fonts detection (this method is more stable across refreshes)
+    const fontList = ['Arial', 'Helvetica', 'Times New Roman', 'Courier', 'Verdana', 'Georgia', 'Palatino', 'Garamond', 'Bookman', 'Comic Sans MS', 'Trebuchet MS', 'Arial Black', 'Impact'];
+    const installedFonts = fontList.filter(font => document.fonts.check(`12px "${font}"`));
+    components.push(installedFonts.join(','));
+  
+    return components
+        .map(component => String(component).replace(/\D+/g, ''))
+        .filter(component => component !== '')
+        .join('');
 };
 
 if ($('.selectpicker').length > 0) {
@@ -94,7 +125,7 @@ $(`button[id="poll-button"]`).on("click", async function() {
             return false
         }
 
-        let user_uid = userFingerprint !== undefined ? userFingerprint : guid();
+        let user_uid = typeof userFingerprint !== 'undefined' ? userFingerprint : guid();
 
         data = {
             guid: user_uid,
@@ -114,25 +145,25 @@ $(`button[id="poll-button"]`).on("click", async function() {
             Notify(response.data.result, responseCode(response.code));
             reset_button();
         } else {
-            $(`div[class="survey-content"] div[class="survey-body"]`).html(response.data.result);
+            $(`div[class~="survey-content"] div[class="survey-body"]`).html(response.data.result);
 
-            if(response.data.additional !== undefined) {
-                if(response.data.additional.percentage !== undefined) {
+            if(typeof response.data.additional !== 'undefined') {
+                if(typeof response.data.additional.percentage !== 'undefined') {
                     $(`div[class~="percentage"]`).html(response.data.additional.percentage);
                 }
                 reset_button(response.data.additional.button_text);
 
-                if(response.data.additional.button_id !== undefined) {
+                if(typeof response.data.additional.button_id !== 'undefined') {
                     $(`input[name="proceed_to_load"]`).val(response.data.additional.button_id);
                 } else {
                     $(`input[name="proceed_to_load"]`).val('continue');
                 }
 
-                if(response.data.additional.guids !== undefined) {
+                if(typeof response.data.additional.guids !== 'undefined') {
                     votersGUID = response.data.additional.guids;
                 } 
 
-                if(response.data.additional.can_skip !== undefined) {
+                if(typeof response.data.additional.can_skip !== 'undefined') {
                     if(response.data.additional.can_skip == 'Yes') {
                         $(`div[id="skipquestion"]`).removeClass('hidden');
                     } else {
@@ -172,9 +203,9 @@ var multi_voting_check = function() {
     if($(`input[name="multipleVoting"]`).length) {
         let value = $(`input[name="multipleVoting"]`).val();
         if(value == "No") {
-            let user_guid = userFingerprint !== undefined ? userFingerprint : guid();
+            let user_guid = typeof userFingerprint !== 'undefined' ? userFingerprint : generateDeviceFingerprint();
             if($.inArray(user_guid, votersGUID) !== -1) {
-                $(`button[id="poll-button"], div[id="skipquestion"]`).remove();
+                $(`button[id="poll-button"  ], div[id="skipquestion"]`).remove();
                 $(`div[class~="percentage"]`).html(`<button class="btn btn-success begin-button">One vote allowed!</button>`);
                 $.post(`${baseURL}surveys/savefingerprint/${user_guid}`);
             }
@@ -186,4 +217,4 @@ var multi_voting_check = function() {
 
 setTimeout(() => {
     multi_voting_check();
-}, 3000);
+}, 500);

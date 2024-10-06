@@ -1,7 +1,7 @@
 <?php
 include_once 'headtags.php';
 ?>
-<div class="survey-content mb-5">
+<div class="survey-content mb-4">
     <?php if( !$isResult ) { ?>
         <div class="survey-body">
             <?php if (!empty($survey['cover_art'])) { ?>
@@ -13,7 +13,7 @@ include_once 'headtags.php';
         </div>
         <div class="text-center mt-3">
             <?php if(!$surveyHasEnded) { ?>
-                <button disabled id="poll-button" data-default="<?= $isContinue ? "Continue" : $survey['button_text'] ?>" class="btn btn-success begin-button">
+                <button disabled id="poll-button" data-default="<?= $isContinue ? "Continue" : $survey['button_text'] ?>" class="btn signup-button btn-success begin-button">
                     <?= $isContinue ? "Continue" : "Please wait <i class='fa fa-spin fa-spinner'></i>" ?>
                 </button>
                 <div class="mt-3 hidden" id="skipquestion">

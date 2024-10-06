@@ -74,7 +74,10 @@ class AppController extends ApiServices {
             // set the user data
             $data['isLoggedIn'] = $this->is_logged_in();
             $data['user'] = $this->_userData;
-        
+            
+            // set the user agent
+            $data['ip_address'] = $this->request->getIPAddress();
+
             // confirm if the user is logged in
             if( !empty($data['user']) ) {
                 unset($data['user']['password']);
@@ -115,6 +118,7 @@ class AppController extends ApiServices {
         if(empty($this->sessObject->_clientId) && empty($this->sessObject->_userApiToken)) {
             try {
                 $data['isLoggedIn'] = false;
+                $data['ip_address'] = $this->request->getIPAddress();
                 die( view($page, $data) );
             } catch(\Exception $e) {
                 die( view("not_found", [

@@ -200,7 +200,8 @@ class SurveysController extends AccessBridge {
 
         // get the votes for this survey
         $votes = $this->db_model->db->table('surveys_votes')
-                                ->where(['survey_id' => $params['survey_id']])->limit(100)->get()->getResultArray();
+                                ->where(['survey_id' => $params['survey_id']])
+                                ->limit(100)->get()->getResultArray();
 
         foreach($params['votes'] as $vote) {
             

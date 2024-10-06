@@ -465,7 +465,7 @@ class Surveys extends AppController {
         if( !empty($this->sessObject->initSurvey) ) {
 
             $initialize = !empty($theSurvey['cover_art']) ? '<div class="fluid-image">
-                <img src="'.config('App')->baseURL . $theSurvey['cover_art'].'" alt=""></div>' : null;
+                <img src="'.config('App')->baseURL . '/' . $theSurvey['cover_art'].'" alt=""></div>' : null;
 
             $initialize .= '<div>'.$theSurvey['description'].'</div>';
 
@@ -566,18 +566,19 @@ class Surveys extends AppController {
             return $this->error($this->invalid_question);
         }
 
-        // get the user agent
-        $userAgent = $this->request->getUserAgent();
-            
         // set the user agent
-        $user_agent = $userAgent->__toString();
         $ip_address = $this->request->getIPAddress();
 
         $additional = [];
 
         if( ($questionId !== 'final') ) {
 
-            $question = format_question($theQuestion, selected_answer($questionId, $theAnswers));
+            // get the position of the question
+            $keys = array_keys($questions);
+            $position = array_search($questionId, $keys);
+
+            $question = format_question($theQuestion, selected_answer($questionId, $theAnswers), true, false, [], ($position + 1));
+
 
             $questionsCount = count($questions);
             $answersCount = empty($theAnswers) ? 1 : count($theAnswers) + 1;
@@ -585,13 +586,13 @@ class Surveys extends AppController {
             $percentage = round(($answersCount / $questionsCount) * 100);
 
             $additional['percentage'] = '
-            <div class="progress-bar-container mt-0">
+            <div class="progress-bar-container">
                 <div class="progress-bar mt-1">
                     <div class="progress-bar-completed" style="width: '.$percentage.'%;"></div>
                 </div>
                 <div class="progress-bar-percentage">'.$percentage.'% completed</div>
             </div>
-            <div class="useripaddress hidden text-center" hidden>
+            <div class="useripaddress text-center">
                 '.$ip_address.'
             </div>';
 
@@ -649,7 +650,7 @@ class Surveys extends AppController {
      * @return Bool
      */
     public function savefingerprint($fingerprint) {
-        $this->sessObject->set(['userFingerprint' => $fingerprint]);
+        $this->sessObject->set(['userFingerprint' => md5($fingerprint)]);
         return true;
     }
 
@@ -878,7 +879,7 @@ class Surveys extends AppController {
             $accepted = [
                 'display_images', 'publicize_result', 'receive_statistics',
                 'allow_multiple_voting', 'paginate_question', 'allow_skip_question', 
-                'thank_you_text', 'closed_survey_text', 'footer_text', 'category'
+                'thank_you_text', 'closed_survey_text', 'footer_text', 'category', 'allow_go_back'
             ];
 
             foreach($params['settings'] as $key => $value) {

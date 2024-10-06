@@ -16,6 +16,7 @@
 				"category": "required|match_num|max_length=255",
 				"is_published": "matches=0,1",
 				"cover_art": "is_file",
+				"allow_go_back": "matches=0,1",
 				"button_text": "required|match_alphanum|max_length=32",
 				"description": "required|match_alphanum|max_length=5000"
 			},
@@ -37,6 +38,7 @@
 				"slug": "match_alphanum|max_length=300",
 				"start_date": "is_date",
 				"end_date": "is_date",
+				"allow_go_back": "matches=0,1",
 				"is_published": "matches=0,1",
 				"category": "required|match_num|max_length=255",
 				"cover_art": "is_file",

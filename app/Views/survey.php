@@ -2,7 +2,7 @@
 include_once 'headtags.php';
 global $AppName, $baseURL;
 $settings = [
-    'publicize_result', 'receive_statistics',
+    'publicize_result', 'receive_statistics', 'allow_go_back',
     'allow_multiple_voting', 'paginate_question', 'allow_skip_question'
 ];
 $atLeastOne = (bool) (hasPermission("surveys", "add", $metadata) || hasPermission("surveys", "update", $metadata));
